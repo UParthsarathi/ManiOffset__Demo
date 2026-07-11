@@ -8,6 +8,7 @@ export const generateOrganizationSchema = () => {
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'contact@feeltheprint.com',
+      telephone: '+91-97911-83612',
       contactType: 'customer service',
       availableLanguage: ['English', 'Tamil'],
     },
@@ -22,46 +23,24 @@ export const generateLocalBusinessSchema = () => {
     {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
-      name: 'Mani Offset - Sivakasi (Headquarters)',
+      name: 'FeelThePRINT (A Unit of Mani Offset Press)',
       image: 'https://feeltheprint.com/logo.png',
-      '@id': 'https://feeltheprint.com/#sivakasi',
+      '@id': 'https://feeltheprint.com/#business',
       url: 'https://feeltheprint.com',
       email: 'contact@feeltheprint.com',
+      telephone: '+91-97911-83612',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Kamaraj Salai',
-        addressLocality: 'Sivakasi',
-        addressRegion: 'Tamil Nadu',
-        postalCode: '626123',
-        addressCountry: 'IN',
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: 9.4533,
-        longitude: 77.8024,
-      },
-      priceRange: '$$$',
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
-      name: 'Mani Offset - Chennai Branch',
-      image: 'https://feeltheprint.com/logo.png',
-      '@id': 'https://feeltheprint.com/#chennai',
-      url: 'https://feeltheprint.com',
-      email: 'contact@feeltheprint.com',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'No: 112/2, Triplicane, Bells Road, Chepauk',
+        streetAddress: '115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram',
         addressLocality: 'Chennai',
         addressRegion: 'Tamil Nadu',
-        postalCode: '600005',
+        postalCode: '600077',
         addressCountry: 'IN',
       },
       geo: {
         '@type': 'GeoCoordinates',
-        latitude: 13.0634,
-        longitude: 80.2804,
+        latitude: 13.0554668,
+        longitude: 80.1424155,
       },
       priceRange: '$$$',
     }
@@ -97,14 +76,6 @@ export const generateProductSchema = (product: {
     brand: {
       '@type': 'Brand',
       name: 'Mani Offset',
-    },
-    offers: {
-      '@type': 'AggregateOffer',
-      priceCurrency: 'INR',
-      availability: 'https://schema.org/InStock',
-      lowPrice: '1000',
-      highPrice: '100000',
-      offerCount: '1',
     },
   };
 };

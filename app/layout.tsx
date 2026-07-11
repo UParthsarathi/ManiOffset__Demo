@@ -24,11 +24,10 @@ import { generateOrganizationSchema, generateLocalBusinessSchema } from '@/lib/s
 export const metadata: Metadata = {
   metadataBase: new URL('https://feeltheprint.com'),
   title: {
-    default: 'Mani Offset | Premium Commercial Printing Services in Sivakasi',
+    default: 'Mani Offset | Commercial Offset Printing Company in Chennai',
     template: '%s | Mani Offset',
   },
-  description: 'Unparalleled volume commercial offset printing services. Based in Sivakasi, South India, delivering high-quality print solutions nationwide.',
-  keywords: ['offset printing', 'commercial printing', 'Sivakasi printers', 'bulk printing', 'Mani Offset', 'FeelThePrint', 'book printing', 'catalog printing'],
+  description: 'Commercial offset printing company in Chennai. Books, catalogues, business stationery and banking print in bulk, delivered across India since 1995.',
   authors: [{ name: 'Mani Offset' }],
   creator: 'Mani Offset',
   publisher: 'Mani Offset',
@@ -38,8 +37,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: 'Mani Offset | Premium Commercial Printing Services',
-    description: 'High-volume commercial offset printing services from Sivakasi, delivering absolute structural integrity and optical fidelity.',
+    title: 'Mani Offset | Commercial Offset Printing Company in Chennai',
+    description: 'High-volume offset printing from Chennai — books, catalogues, business stationery and banking print, delivered across India since 1995.',
     url: 'https://feeltheprint.com',
     siteName: 'Mani Offset',
     locale: 'en_IN',
@@ -47,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mani Offset | Premium Commercial Printing',
-    description: 'High-volume commercial offset printing services from Sivakasi.',
+    title: 'Mani Offset | Commercial Offset Printing in Chennai',
+    description: 'High-volume offset printing from Chennai, delivered across India.',
   },
   robots: {
     index: true,

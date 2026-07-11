@@ -12,7 +12,7 @@ export default function CareersPage() {
         Careers
       </h1>
       <p className="text-sm text-slate-500 mb-8 font-sans">
-        Join our team of dedicated professionals in Sivakasi.
+        Join our team of dedicated professionals in Chennai.
       </p>
 
       <div className="prose prose-slate max-w-none text-[15px] leading-relaxed text-slate-700">

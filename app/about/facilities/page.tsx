@@ -13,12 +13,12 @@ export default function FacilitiesPage() {
         Our Facilities
       </h1>
       <p className="text-sm text-slate-500 mb-8 font-sans">
-        State-of-the-art production infrastructure in Sivakasi.
+        State-of-the-art production infrastructure in Chennai.
       </p>
 
       <div className="prose prose-slate max-w-none text-[15px] leading-relaxed text-slate-700">
         <p className="mb-6">
-          Spread across a sprawling campus in Sivakasi, Mani Offset houses one of the most advanced printing setups in South India. Our infrastructure spans over 200,000 square feet of dedicated production space, meticulously designed for automated material flow, strict environmental controls, and 24/7 high-volume throughput. We have engineered our facility to eliminate operational bottlenecks, with logical, linear movements from raw material intake through pre-press, printing, finishing, and finally logistics.
+          Spread across a sprawling campus in Chennai, Mani Offset houses one of the most advanced printing setups in South India. Our infrastructure spans over 200,000 square feet of dedicated production space, meticulously designed for automated material flow, strict environmental controls, and 24/7 high-volume throughput. We have engineered our facility to eliminate operational bottlenecks, with logical, linear movements from raw material intake through pre-press, printing, finishing, and finally logistics.
         </p>
         
         <div className="relative aspect-video rounded overflow-hidden shadow-sm border border-slate-200 mb-8">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { MessageCircle, ArrowRight, Check } from 'lucide-react';
+import { MessageCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: number, rawWhatsappMessage: string }) {
@@ -13,9 +13,9 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
     if (pages || quantity) {
       msg += `\n\nDetails:`;
       if (pages) msg += `\n- Pages: ${pages}`;
-      if (quantity) msg += `\n- Quantity: ${quantity}`;
+      if (quantity) msg += `\n- Copies: ${quantity}`;
     }
-    return `https://wa.me/919999999999?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/919791183612?text=${encodeURIComponent(msg)}`;
   };
 
   const calculatorUrl = `/calculator?product=${productId}${pages ? `&pages=${pages}` : ''}${quantity ? `&quantity=${quantity}` : ''}`;
@@ -36,7 +36,7 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
           </div>
         </div>
         <div className="w-full">
-          <label className="block text-sm font-semibold text-gray-900 mb-2">Quantity</label>
+          <label className="block text-sm font-semibold text-gray-900 mb-2">Copies</label>
           <div className="relative">
             <input 
               type="number" 
@@ -50,30 +50,30 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
-        <Link 
-          href={calculatorUrl}
-          className="flex-1 group flex items-center justify-center gap-2 bg-[#6cd4f4] hover:bg-[#5bc8e8] text-slate-900 px-6 py-4 rounded-xl transition-all font-bold text-[15px] shadow-sm"
-        >
-          <span>Calculate Price</span>
-          <ArrowRight className="w-5 h-5 text-slate-700 group-hover:translate-x-0.5 transition-transform" />
-        </Link>
-        <a 
+        <a
           href={buildWhatsappUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-6 py-4 rounded-xl transition-all font-bold text-[15px] shadow-sm"
+          className="flex-1 flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-6 py-3.5 rounded-lg transition-all font-bold text-[15px]"
         >
           <MessageCircle className="w-5 h-5" />
           Order via WhatsApp
         </a>
+        <Link
+          href={calculatorUrl}
+          className="flex-1 group flex items-center justify-center gap-2 bg-[#005fb3] hover:bg-[#004c8f] text-white px-6 py-3.5 rounded-lg transition-all font-bold text-[15px]"
+        >
+          <span>Get an Instant Quote</span>
+          <ArrowRight className="w-4 h-4 text-white/80 group-hover:translate-x-0.5 transition-transform" />
+        </Link>
       </div>
-      
-      <div className="text-center mt-4 text-xs text-gray-500 flex items-center justify-center gap-1.5">
-        <div className="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center bg-gray-50">
-          <Check className="w-2.5 h-2.5 text-gray-400" />
-        </div>
-        <span>100% satisfaction guaranteed</span>
-      </div>
+
+      <p
+        style={{ fontFamily: 'var(--font-mono), ui-monospace, monospace' }}
+        className="text-center mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400"
+      >
+        A unit of Mani Offset Press · Printing since 1995
+      </p>
     </div>
   );
 }

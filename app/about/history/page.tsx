@@ -18,7 +18,7 @@ export default function HistoryPage() {
 
       <div className="prose prose-slate max-w-none text-[15px] leading-relaxed text-slate-700">
         <p className="mb-6">
-          Founded in Sivakasi by visionary print artisans, Mani Offset began as a small-scale letterpress operation. With a focus on quality and unwavering commitment to deadlines, we quickly gained the trust of local businesses and academic institutions. What started in a modest 2,000-square-foot facility with hand-fed treadle presses evolved into a sprawling industrial operation, driven by a philosophy that continuous reinvestment in technology is the only way to remain competitive and relevant in a rapidly shifting print landscape.
+          Founded in 1995 by visionary print artisans, Mani Offset began as a small-scale letterpress operation. With a focus on quality and unwavering commitment to deadlines, we quickly gained the trust of local businesses and academic institutions. What started in a modest 2,000-square-foot facility with hand-fed treadle presses evolved into a sprawling industrial operation, driven by a philosophy that continuous reinvestment in technology is the only way to remain competitive and relevant in a rapidly shifting print landscape.
         </p>
 
         <div className="relative aspect-[21/9] rounded overflow-hidden shadow-sm border border-slate-200 mb-8 md:mb-10 lg:mb-12">
