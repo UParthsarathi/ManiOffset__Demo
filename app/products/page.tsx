@@ -53,15 +53,15 @@ function ProductsContent() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f5f7fa] font-sans">
+    <div className="min-h-screen flex flex-col bg-white font-sans">
       <Navbar />
       
       {/* Dark Header Hero */}
-      <section className="pt-32 pb-16 px-4 bg-[#2f3241] text-white flex flex-col items-center justify-center text-center">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+      <section className="pt-16 pb-14 px-4 bg-[#fdfbf7] text-ink flex flex-col items-center justify-center text-center border-b border-slate-200">
+        <h1 className="text-4xl md:text-5xl font-serif font-semibold tracking-tight mb-4">
           What do you want to make?
         </h1>
-        <p className="text-lg text-slate-400 mb-8 font-light">
+        <p className="text-lg text-slate-500 mb-8 font-light">
           Browse 30+ product types for fast online quotes!
         </p>
         
@@ -71,7 +71,7 @@ function ProductsContent() {
           </div>
           <input
             type="text"
-            className="block w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-colors"
+            className="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-300 rounded-lg text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-colors"
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -99,7 +99,7 @@ function ProductsContent() {
                     onClick={() => setSelectedCategory(cat.name)}
                     className={`w-full flex items-center justify-between px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
                       isCurrent 
-                        ? "bg-[#1e1e1e] text-white" 
+                        ? "bg-ink text-white" 
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
@@ -165,7 +165,7 @@ function ProductsContent() {
                     
                     {/* Bottom Action */}
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100">
-                      <span className="text-xs font-bold text-emerald-600">
+                      <span className="text-xs font-bold text-[#b45309]">
                         Instant Quote
                       </span>
                       <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" />

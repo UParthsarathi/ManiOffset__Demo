@@ -8,10 +8,10 @@ export function PressFooter() {
           &copy; {new Date().getFullYear()} Mani Offset. All rights reserved.
         </p>
         <div className="flex items-center gap-6">
-          <Link href="/" className="hover:text-[#005fb3] transition-colors">
+          <Link href="/" className="hover:text-[#f29a1b] transition-colors">
             FeelThePrint Home
           </Link>
-          <Link href="/about" className="hover:text-[#005fb3] transition-colors">
+          <Link href="/about" className="hover:text-[#f29a1b] transition-colors">
             About Us
           </Link>
         </div>

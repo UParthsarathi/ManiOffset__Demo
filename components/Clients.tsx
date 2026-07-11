@@ -181,19 +181,16 @@ export function Clients() {
   ];
 
   return (
-    <section className="w-full bg-[#1e2363] py-14 px-4 sm:px-6 md:px-12 xl:px-24 relative overflow-hidden">
-      {/* Decorative Blueprint Overlay */}
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:40px_40px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full filter blur-[100px] pointer-events-none" />
+    <section className="w-full bg-[#fdfbf7] py-16 px-4 sm:px-6 md:px-12 xl:px-24 relative overflow-hidden border-y border-slate-200">
 
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Stark Center Title above the card */}
-        <h2 className="text-white text-base sm:text-xl lg:text-3xl font-serif tracking-[0.1em] text-center mb-10 opacity-90 font-light">
+        <h2 className="text-ink text-base sm:text-xl lg:text-3xl font-serif tracking-[0.1em] text-center mb-10 font-light">
           A few of our <strong className="font-bold">prestigious clients</strong>
         </h2>
 
         {/* Clean, Majestic stark-white card container */}
-        <div className="w-full bg-white rounded-3xl shadow-2xl p-8 sm:p-12 border border-white/10 relative z-10 transition-all hover:scale-[1.01]">
+        <div className="w-full bg-white rounded-3xl shadow-sm p-8 sm:p-12 border border-slate-200 relative z-10 transition-all">
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-12 gap-x-8 items-center justify-items-center">
             

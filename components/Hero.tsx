@@ -41,18 +41,14 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d1430] overflow-hidden py-12 md:py-20 lg:py-24 px-4 sm:px-6 md:px-12 xl:px-24 border-b border-white/5">
-      {/* Dark ambient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0c0f24] via-[#0d1430] to-[#141d40] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-
+    <section className="relative w-full bg-white overflow-hidden py-14 md:py-24 lg:py-28 px-4 sm:px-6 md:px-12 xl:px-24 border-b border-slate-200">
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Hand Column: Text Details and CTAs */}
         <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6 sm:space-y-8 max-w-2xl">
           {/* Established pill */}
-          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-white/10 rounded-full bg-white/5 shadow-md">
-            <span className="w-1.5 h-1.5 bg-[#f29a1b] rounded-full animate-pulse" />
-            <span className="text-[10px] sm:text-xs font-bold text-slate-300 uppercase tracking-widest font-mono">
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-slate-200 rounded-full bg-white">
+            <span className="w-1.5 h-1.5 bg-[#f29a1b] rounded-full" />
+            <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
               ESTABLISHED 1995
             </span>
           </div>
@@ -64,10 +60,10 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="flex flex-col gap-1 sm:gap-4"
           >
-            <span className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white tracking-tight leading-tight drop-shadow-lg">
+            <span className="text-4xl sm:text-5xl md:text-6xl font-serif font-semibold text-ink tracking-tight leading-tight">
               Highest Quality
             </span>
-            <span className="text-5xl sm:text-6xl md:text-7xl font-sans font-black text-[#f29a1b] tracking-tight leading-[1] drop-shadow-sm">
+            <span className="text-5xl sm:text-6xl md:text-7xl font-serif font-semibold text-[#f29a1b] tracking-tight leading-[1]">
               Custom Printing
             </span>
           </motion.h1>
@@ -77,7 +73,7 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed font-sans max-w-xl font-light"
+            className="text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed font-sans max-w-xl font-light"
           >
             We deliver unparalleled volume commercial offset printing. From academic textbooks to premium corporate stationery, we bring your most demanding visions to life with absolute precision.
           </motion.p>
@@ -91,7 +87,7 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
                 e.preventDefault();
                 document.getElementById('home-products')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-4 bg-[#f29a1b] hover:bg-[#de8710] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-lg shadow-[#f29a1b]/10 hover:shadow-xl hover:shadow-[#f29a1b]/15 transition-all text-center flex items-center justify-center gap-2 group cursor-pointer"
+              className="px-8 py-4 bg-[#f29a1b] hover:bg-[#de8710] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg transition-all text-center flex items-center justify-center gap-2 group cursor-pointer"
               id="hero-discover-options-btn"
             >
               <span>Browse Print Catalog</span>
@@ -100,7 +96,7 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
             {/* Calculator Button */}
             <button
               onClick={() => router.push('/calculator')}
-              className="px-8 py-4 bg-transparent border border-[#f29a1b]/30 hover:border-[#f29a1b]/60 hover:bg-[#f29a1b]/5 text-[#f29a1b] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg transition-all text-center flex items-center justify-center gap-2 cursor-pointer group"
+              className="px-8 py-4 bg-transparent border border-slate-300 hover:border-slate-400 hover:bg-slate-50 text-ink text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg transition-all text-center flex items-center justify-center gap-2 cursor-pointer group"
             >
               <Calculator className="w-4 h-4" />
               <span>Get Custom Quote</span>
@@ -108,20 +104,20 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
           </div>
 
           {/* Status Bar */}
-          <div className="pt-8 mt-4 border-t border-white/10 flex items-center gap-6 sm:gap-12">
+          <div className="pt-8 mt-4 border-t border-slate-200 flex items-center gap-6 sm:gap-12">
             <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-black text-white tracking-tight">28+</span>
-              <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Years Exp.</span>
+              <span className="text-2xl md:text-3xl font-black text-ink tracking-tight">28+</span>
+              <span className="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">Years Exp.</span>
             </div>
-            <div className="w-px h-8 bg-white/10"></div>
+            <div className="w-px h-8 bg-slate-200"></div>
             <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-black text-white tracking-tight">10k+</span>
-              <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Projects</span>
+              <span className="text-2xl md:text-3xl font-black text-ink tracking-tight">10k+</span>
+              <span className="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">Projects</span>
             </div>
-            <div className="w-px h-8 bg-white/10"></div>
+            <div className="w-px h-8 bg-slate-200"></div>
             <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-black text-white tracking-tight">ZERO</span>
-              <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Missed Deadlines</span>
+              <span className="text-2xl md:text-3xl font-black text-ink tracking-tight">ZERO</span>
+              <span className="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">Missed Deadlines</span>
             </div>
           </div>
         </div>
@@ -149,7 +145,7 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
           {/* Holographic Play Interactive Badge positioned floating in foreground */}
           <div 
             onClick={onLaunchBooklet}
-            className="absolute bottom-4 md:bottom-12 right-[5%] bg-[#f29a1b] text-white font-mono text-[10px] md:text-xs font-bold px-5 py-3 rounded-full shadow-2xl border border-[#ffb142] flex items-center gap-2 cursor-pointer animate-bounce z-50 hover:bg-[#ffb142] transition-colors"
+            className="absolute bottom-4 md:bottom-12 right-[5%] bg-[#f29a1b] text-white font-mono text-[10px] md:text-xs font-bold px-5 py-3 rounded-full shadow-lg border border-[#ffb142] flex items-center gap-2 cursor-pointer z-50 hover:bg-[#ffb142] transition-colors"
           >
             <Sparkles className="w-4 h-4 text-white" />
             <span>OPEN 3D SHOWROOM</span>

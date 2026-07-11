@@ -8,3 +8,36 @@
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
 }
+
+/* Unified minimal palette — one ink, one amber accent, warm paper.
+   Enables text-ink / bg-ink / border-ink / text-amber / bg-paper utilities so
+   the same hexes already scattered across components resolve to named tokens. */
+@theme {
+  --color-ink: #20283c;
+  --color-amber: #f29a1b;
+  --color-amber-deep: #de8710;
+  --color-paper: #fdfbf7;
+}
+
+/* Quality floor: visible keyboard focus, calm selection, respect reduced motion. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background-color: #fde9c8;
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

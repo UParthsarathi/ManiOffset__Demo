@@ -8,8 +8,7 @@ import StructuredData from "@/components/StructuredData";
 import { generateProductSchema } from "@/lib/seo";
 import { Metadata } from "next";
 import { BackButton } from "@/components/BackButton";
-import { DesktopProductView } from "@/components/product/DesktopProductView";
-import { MobileProductView } from "@/components/product/MobileProductView";
+import { ProductView } from "@/components/product/ProductView";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -58,8 +57,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       </div>
 
       <main className="flex-1 max-w-[1536px] mx-auto w-full px-4 sm:px-6 lg:px-8 pb-20">
-        <DesktopProductView product={product} whatsappMessage={whatsappMessage} />
-        <MobileProductView product={product} whatsappMessage={whatsappMessage} />
+        <ProductView product={product} whatsappMessage={whatsappMessage} />
       </main>
 
       <Footer />

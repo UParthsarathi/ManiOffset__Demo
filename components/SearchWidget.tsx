@@ -42,7 +42,7 @@ export function SearchWidget({ isMobile = false, onResultClick }: SearchWidgetPr
       <div 
         className={`flex items-center ${
           isMobile 
-            ? "bg-[#0d1430] border border-white/10 rounded-lg p-2.5 shadow-sm" 
+            ? "bg-slate-50 border border-slate-200 rounded-lg p-2.5" 
             : "px-4 h-full"
         }`}
       >
@@ -58,14 +58,14 @@ export function SearchWidget({ isMobile = false, onResultClick }: SearchWidgetPr
           }}
           placeholder="Search for products..." 
           className={`w-full outline-none bg-transparent ${
-            isMobile ? "text-xs text-slate-200 pr-2" : "text-sm text-white placeholder-slate-450 pr-8"
+            isMobile ? "text-xs text-ink pr-2" : "text-sm text-ink placeholder-slate-400 pr-8"
           }`}
         />
         {query ? (
           <button 
             type="button"
             onClick={handleClear}
-            className={`cursor-pointer ${isMobile ? "text-slate-400" : "absolute right-4 text-slate-400 hover:text-white"}`}
+            className={`cursor-pointer ${isMobile ? "text-slate-400" : "absolute right-4 text-slate-400 hover:text-ink"}`}
           >
             <X className="w-4 h-4" />
           </button>
@@ -77,7 +77,7 @@ export function SearchWidget({ isMobile = false, onResultClick }: SearchWidgetPr
       {/* Search Results Dropdown */}
       {isOpen && query.trim() !== "" && (
         <div 
-          className={`absolute z-50 bg-[#111111] border border-white/10 shadow-2xl overflow-hidden animate-fade-in ${
+          className={`absolute z-50 bg-white border border-slate-200 shadow-xl overflow-hidden animate-fade-in ${
             isMobile 
               ? "left-0 right-0 top-full mt-2 rounded-lg" 
               : "left-0 right-0 top-[calc(100%+1px)] rounded-b-lg"
@@ -85,7 +85,7 @@ export function SearchWidget({ isMobile = false, onResultClick }: SearchWidgetPr
         >
           {filteredProducts.length > 0 ? (
             <div className="py-2">
-              <div className="px-4 py-2 text-[10px] font-bold tracking-widest uppercase text-slate-500 border-b border-white/5 mb-1">
+              <div className="px-4 py-2 text-[10px] font-bold tracking-widest uppercase text-slate-400 border-b border-slate-100 mb-1">
                 Products
               </div>
               {filteredProducts.map(product => (
@@ -97,9 +97,9 @@ export function SearchWidget({ isMobile = false, onResultClick }: SearchWidgetPr
                     setQuery("");
                     if (onResultClick) onResultClick();
                   }}
-                  className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#1a1a1a] transition-colors group cursor-pointer"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group cursor-pointer"
                 >
-                  <div className="relative w-10 h-10 rounded overflow-hidden shrink-0 bg-white border border-white/10">
+                  <div className="relative w-10 h-10 rounded overflow-hidden shrink-0 bg-white border border-slate-200">
                     <Image
                       src={product.imageUrl}
                       alt={product.title}
@@ -109,10 +109,10 @@ export function SearchWidget({ isMobile = false, onResultClick }: SearchWidgetPr
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-semibold text-slate-200 truncate group-hover:text-white transition-colors">{product.title}</h4>
+                    <h4 className="text-xs font-semibold text-ink truncate group-hover:text-amber-600 transition-colors">{product.title}</h4>
                     <p className="text-[10px] text-slate-500 truncate">{product.category}</p>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:text-amber-500 transition-colors" />
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-amber-600 transition-colors" />
                 </Link>
               ))}
             </div>

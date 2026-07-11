@@ -17,10 +17,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full bg-[#0d1430] text-slate-300 font-sans border-t border-white/5 relative">
-      {/* Decorative Blueprint Lines */}
-      <div className="absolute inset-0 bg-grid-white/[0.01] bg-[size:40px_40px] pointer-events-none" />
-
+    <footer className="w-full bg-[#fdfbf7] text-slate-600 font-sans border-t border-slate-200 relative">
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16 lg:py-20 relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
         
@@ -49,7 +46,7 @@ export function Footer() {
           </div>
 
           {/* Sourcing/Location */}
-          <div className="space-y-3 pt-2 text-xs md:text-sm text-slate-400">
+          <div className="space-y-3 pt-2 text-xs md:text-sm text-slate-600">
             <div className="flex items-start gap-2.5">
               <MapPin className="w-4 h-4 text-[#f29a1b] shrink-0 mt-0.5" />
               <span>FeelThePRINT, Chennai, Tamil Nadu, India.</span>
@@ -66,7 +63,7 @@ export function Footer() {
 
           {/* Embedded Map */}
           <div className="pt-4">
-            <div className="w-full h-40 sm:h-48 rounded-xl overflow-hidden border border-white/10 shadow-lg grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+            <div className="w-full h-40 sm:h-48 rounded-xl overflow-hidden border border-slate-200 shadow-sm grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
               <iframe
                 width="100%"
                 height="100%"
@@ -86,7 +83,7 @@ export function Footer() {
           
           {/* Links 1: LET US HELP */}
           <div className="space-y-4">
-            <h4 className="text-white text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
+            <h4 className="text-ink text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
               LET US HELP
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
@@ -115,7 +112,7 @@ export function Footer() {
 
           {/* Links 2: OUR PRODUCTS */}
           <div className="space-y-4">
-            <h4 className="text-white text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
+            <h4 className="text-ink text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
               OUR PRODUCTS
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
@@ -144,7 +141,7 @@ export function Footer() {
 
           {/* Links 3: OUR COMPANY */}
           <div className="space-y-4 col-span-2 sm:col-span-1">
-            <h4 className="text-white text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
+            <h4 className="text-ink text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
               OUR COMPANY
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
@@ -176,7 +173,7 @@ export function Footer() {
       </div>
 
       {/* Extreme Fine Bottom Bar / Subfoot */}
-      <div className="w-full bg-[#0a0f26] py-6 px-6 sm:px-12 border-t border-white/5 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="w-full bg-white py-6 px-6 sm:px-12 border-t border-slate-200 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-xs text-slate-500 font-medium text-center sm:text-left">
           &copy; {new Date().getFullYear()} feeltheprint. All rights reserved. A Unit of Mani Offset Press.
         </div>
@@ -184,7 +181,7 @@ export function Footer() {
         {/* Quick Back to Top button */}
         <button 
           onClick={handleScrollToTop}
-          className="p-2 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 text-slate-300 hover:text-white transition-all shadow cursor-pointer flex items-center justify-center"
+          className="p-2 bg-slate-50 hover:bg-slate-100 rounded-full border border-slate-200 text-slate-600 hover:text-ink transition-all cursor-pointer flex items-center justify-center"
           title="Back to Top"
         >
           <ArrowUp className="w-4 h-4" />

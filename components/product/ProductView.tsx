@@ -4,26 +4,26 @@ import { ProductGallery } from '@/components/ProductGallery';
 import { ProductDescriptionRenderer } from '@/components/descriptions';
 import { QuickQuoteForm } from '@/components/QuickQuoteForm';
 
-interface DesktopProductViewProps {
+interface ProductViewProps {
   product: any;
   whatsappMessage: string;
 }
 
-export function DesktopProductView({ product, whatsappMessage }: DesktopProductViewProps) {
+export function ProductView({ product, whatsappMessage }: ProductViewProps) {
   return (
-    <div className="hidden md:block">
-      <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 mb-10">
+    <div>
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-10">
         
-        {/* Left: Product Image */}
+        {/* Product image */}
         <div className="w-full lg:w-[55%] xl:w-[60%] shrink-0">
            <ProductGallery mainImageUrl={product.imageUrl} title={product.title} />
         </div>
 
-        {/* Right: Details & Action */}
-        <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col pt-2 lg:pt-0">
+        {/* Details & action */}
+        <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col">
           <h1
             style={{ fontFamily: 'var(--font-serif), Georgia, serif', color: '#20283c' }}
-            className="text-[32px] md:text-[38px] font-semibold leading-[1.12] tracking-[-0.01em] [text-wrap:balance] mb-6"
+            className="text-[30px] md:text-[38px] font-semibold leading-[1.12] tracking-[-0.01em] [text-wrap:balance] mb-6"
           >
             {product.title}
           </h1>
