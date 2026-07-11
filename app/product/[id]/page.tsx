@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       <Navbar />
 
       {/* Navigation — back + breadcrumb on one line */}
-      <div className="pt-7 pb-5 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex flex-wrap items-center gap-x-3 gap-y-1">
+      <div className="pt-7 pb-5 px-4 sm:px-6 lg:px-8 max-w-[1536px] mx-auto w-full flex flex-wrap items-center gap-x-3 gap-y-1">
         <BackButton href={`/products?category=${encodeURIComponent(product.category)}`} className="mb-0" />
         <span className="h-4 w-px bg-slate-200 hidden sm:block" aria-hidden="true"></span>
         <div className="flex flex-wrap items-center text-sm text-gray-500">
@@ -57,7 +57,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         </div>
       </div>
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-20">
+      <main className="flex-1 max-w-[1536px] mx-auto w-full px-4 sm:px-6 lg:px-8 pb-20">
         <DesktopProductView product={product} whatsappMessage={whatsappMessage} />
         <MobileProductView product={product} whatsappMessage={whatsappMessage} />
       </main>
