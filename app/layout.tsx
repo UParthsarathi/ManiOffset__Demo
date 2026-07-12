@@ -23,6 +23,7 @@ import { generateOrganizationSchema, generateLocalBusinessSchema } from '@/lib/s
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://feeltheprint.com'),
+  alternates: { canonical: './' },
   title: {
     default: 'Mani Offset | Commercial Offset Printing Company in Chennai',
     template: '%s | Mani Offset',

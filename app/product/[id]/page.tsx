@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: meta ? { absolute: meta.title } : `${product.title} Printing Services | FeelThePRINT`,
     description: meta?.description ?? product.description,
+    alternates: { canonical: `/product/${product.id}` },
   };
 }
 
