@@ -80,12 +80,12 @@ function ProductsContent() {
       </section>
 
       {/* Main Content Layout */}
-      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-sm my-0 min-h-[600px] flex flex-col md:flex-row gap-10">
+      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 bg-white shadow-sm my-0 min-h-[600px] flex flex-col md:flex-row gap-5 md:gap-10">
         
         {/* Left Sidebar: Categories */}
         <aside className="w-full md:w-64 shrink-0">
-          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Categories</h3>
-          <ul className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:flex-col md:gap-0 md:space-y-1 md:overflow-visible">
+          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 md:mb-4">Categories</h3>
+          <ul className="flex gap-1.5 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:flex-col md:gap-0 md:space-y-1 md:overflow-visible">
             {displayCategories.map((cat, idx) => {
               const isCurrent = selectedCategory === cat.name;
               const count = categoryCounts[cat.name] || 0;
@@ -97,14 +97,14 @@ function ProductsContent() {
                 <li key={idx} className="shrink-0 md:shrink">
                   <button
                     onClick={() => setSelectedCategory(cat.name)}
-                    className={`w-auto md:w-full flex items-center justify-between gap-2 px-4 py-2 md:py-2.5 rounded-full md:rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
+                    className={`w-auto md:w-full flex items-center justify-between gap-2 px-3 py-1.5 md:px-4 md:py-2.5 rounded-full md:rounded-md text-xs md:text-sm font-medium whitespace-nowrap transition-colors ${
                       isCurrent 
                         ? "bg-[#1e1e1e] text-white" 
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
                     <span className="truncate pr-2">{cat.name}</span>
-                    <span className={`text-xs ${isCurrent ? 'text-slate-400' : 'text-slate-400'}`}>
+                    <span className={`hidden md:inline text-xs ${isCurrent ? 'text-slate-400' : 'text-slate-400'}`}>
                       {count}
                     </span>
                   </button>
@@ -117,8 +117,8 @@ function ProductsContent() {
         {/* Right Content: Products */}
         <div className="flex-1 flex flex-col">
           {/* Top Bar */}
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-slate-100">
-            <div className="text-sm text-slate-600 mb-4 sm:mb-0">
+          <div className="flex flex-row justify-between items-center mb-4 pb-3 sm:mb-6 sm:pb-4 border-b border-slate-100">
+            <div className="text-sm text-slate-600">
               Showing <strong className="text-slate-900 font-medium">{filteredProducts.length}</strong> products
             </div>
             <div className="flex items-center gap-2 text-sm">
@@ -134,35 +134,35 @@ function ProductsContent() {
           {filteredProducts.length === 0 ? (
              <div className="py-20 text-center text-slate-500">No products found matching your criteria.</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <Link href={`/product/${product.id}`} key={product.id} className="group flex flex-col bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                   {/* Image Section */}
-                  <div className="relative aspect-[4/3] w-full bg-[#f8f9fa] border-b border-slate-100 overflow-hidden">
+                  <div className="relative aspect-square sm:aspect-[4/3] w-full bg-[#f8f9fa] border-b border-slate-100 overflow-hidden">
                     <Image
                       src={product.imageUrl}
                       alt={product.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 33vw, (max-width: 1200px) 50vw, 25vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                       referrerPolicy="no-referrer"
                     />
                   </div>
                   
                   {/* Content Section */}
-                  <div className="p-5 flex flex-col flex-1">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                  <div className="p-2 sm:p-5 flex flex-col flex-1">
+                    <span className="hidden sm:block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">
                       {product.categoryLabel}
                     </span>
-                    <h3 className="text-base font-bold text-slate-900 mb-2 leading-snug">
+                    <h3 className="text-[11px] sm:text-base font-bold text-slate-900 mb-0 sm:mb-2 leading-snug line-clamp-2 sm:line-clamp-none">
                       {product.title}
                     </h3>
-                    <p className="text-sm text-slate-500 line-clamp-3 mb-6 flex-1">
+                    <p className="hidden sm:block text-sm text-slate-500 line-clamp-3 mb-6 flex-1">
                       {product.description}
                     </p>
                     
                     {/* Bottom Action */}
-                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100">
+                    <div className="mt-auto hidden sm:flex items-center justify-between pt-4 border-t border-slate-100">
                       <span className="text-xs font-bold text-emerald-600">
                         Instant Quote
                       </span>

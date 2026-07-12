@@ -22,8 +22,8 @@ export function ProductsSection() {
   }, [activeCategory, searchQuery]);
 
   return (
-    <section className="w-full bg-transparent py-12 px-2 sm:px-6 md:px-8 xl:px-12 relative z-10" id="home-products">
-      <div className="max-w-7xl mx-auto flex flex-col gap-8">
+    <section className="w-full bg-transparent py-8 sm:py-12 px-2 sm:px-6 md:px-8 xl:px-12 relative z-10" id="home-products">
+      <div className="max-w-7xl mx-auto flex flex-col gap-5 sm:gap-8">
         
         {/* Header Header */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
@@ -61,14 +61,14 @@ export function ProductsSection() {
 
         {/* Category Filters - Wrapping Chip Cloud */}
         <div className="w-full relative py-2 sm:mb-0">
-          <div className="flex flex-wrap w-full justify-center gap-2 sm:gap-3 pb-4">
+          <div className="flex w-full flex-nowrap overflow-x-auto justify-start gap-2 pb-3 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center sm:gap-3 sm:pb-4 sm:overflow-visible">
             {CATEGORIES.map((category) => {
               const isActive = activeCategory === category;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`relative px-4 sm:px-5 py-2.5 rounded-full font-mono text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase whitespace-nowrap transition-colors duration-300 ${
+                  className={`relative shrink-0 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full font-mono text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase whitespace-nowrap transition-colors duration-300 ${
                     isActive
                       ? "text-white"
                       : "text-slate-500 hover:text-slate-800 bg-white border border-slate-200 hover:border-slate-300 shadow-sm"
@@ -89,7 +89,7 @@ export function ProductsSection() {
         </div>
 
         {/* Sub-bar: Showing results & Search */}
-        <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-4 sm:gap-6 border-b border-slate-200/60 pb-4 sm:pb-6 mt-2">
+        <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3 sm:gap-6 border-b border-slate-200/60 pb-4 sm:pb-6 mt-2">
           <div className="uppercase font-mono text-[10px] sm:text-xs tracking-widest text-slate-400 w-full text-center sm:text-left">
             Showing <span className="text-slate-900 font-bold">{filteredProducts.length}</span> Products
           </div>
