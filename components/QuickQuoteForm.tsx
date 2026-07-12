@@ -26,11 +26,12 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
         <div className="w-full">
           <label className="block text-sm font-semibold text-gray-900 mb-2">Pages</label>
           <div className="relative">
-            <input 
-              type="number" 
+            <input
+              type="number"
+              inputMode="numeric"
               value={pages}
               onChange={(e) => setPages(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base md:text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all placeholder-gray-400 bg-gray-50/50 hover:bg-white"
               placeholder="e.g., 100"
             />
           </div>
@@ -38,11 +39,12 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
         <div className="w-full">
           <label className="block text-sm font-semibold text-gray-900 mb-2">Copies</label>
           <div className="relative">
-            <input 
-              type="number" 
+            <input
+              type="number"
+              inputMode="numeric"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base md:text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all placeholder-gray-400 bg-gray-50/50 hover:bg-white"
               placeholder="e.g., 500"
             />
           </div>

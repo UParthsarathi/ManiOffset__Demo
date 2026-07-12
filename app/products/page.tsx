@@ -57,7 +57,7 @@ function ProductsContent() {
       <Navbar />
       
       {/* Dark Header Hero */}
-      <section className="pt-32 pb-16 px-4 bg-[#2f3241] text-white flex flex-col items-center justify-center text-center">
+      <section className="pt-28 pb-12 md:pt-32 md:pb-16 px-4 bg-[#2f3241] text-white flex flex-col items-center justify-center text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           What do you want to make?
         </h1>
@@ -85,7 +85,7 @@ function ProductsContent() {
         {/* Left Sidebar: Categories */}
         <aside className="w-full md:w-64 shrink-0">
           <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Categories</h3>
-          <ul className="space-y-1">
+          <ul className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:flex-col md:gap-0 md:space-y-1 md:overflow-visible">
             {displayCategories.map((cat, idx) => {
               const isCurrent = selectedCategory === cat.name;
               const count = categoryCounts[cat.name] || 0;
@@ -94,10 +94,10 @@ function ProductsContent() {
               if (count === 0 && cat.name !== "All Products") return null;
 
               return (
-                <li key={idx}>
+                <li key={idx} className="shrink-0 md:shrink">
                   <button
                     onClick={() => setSelectedCategory(cat.name)}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                    className={`w-auto md:w-full flex items-center justify-between gap-2 px-4 py-2 md:py-2.5 rounded-full md:rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
                       isCurrent 
                         ? "bg-[#1e1e1e] text-white" 
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -124,7 +124,7 @@ function ProductsContent() {
             <div className="flex items-center gap-2 text-sm">
               <span className="text-slate-500">Sort by:</span>
               <button className="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded text-slate-700 bg-white hover:bg-slate-50">
-                Alphabetical (A-Z)
+                Featured
                 <ChevronDown className="w-4 h-4 text-slate-400" />
               </button>
             </div>

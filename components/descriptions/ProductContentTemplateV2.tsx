@@ -41,7 +41,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={serif}
-      className="text-[26px] md:text-[30px] font-semibold leading-[1.2] tracking-[-0.01em] [text-wrap:balance] mb-4"
+      className="text-[23px] md:text-[30px] font-semibold leading-[1.2] tracking-[-0.01em] [text-wrap:balance] mb-4"
     >
       <span style={{ color: INK }}>{children}</span>
     </h2>
@@ -131,9 +131,9 @@ export function ProductContentTemplateV2({ data: content, productId, whatsappMes
                 </colgroup>
                 <thead className="bg-slate-50">
                   <tr style={{ borderBottom: `2px solid ${INK}` }}>
-                    <th style={mono} className="py-3 px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 whitespace-nowrap border-r border-slate-200">Category</th>
-                    <th style={mono} className="py-3 px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 whitespace-nowrap border-r border-slate-200">Printing Size</th>
-                    <th style={mono} className="py-3 px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 whitespace-nowrap border-r border-slate-200">Dimensions (Inches)</th>
+                    <th style={mono} className="py-3 px-3 md:px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 whitespace-nowrap border-r border-slate-200">Category</th>
+                    <th style={mono} className="py-3 px-3 md:px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 whitespace-nowrap border-r border-slate-200">Printing Size</th>
+                    <th style={mono} className="py-3 px-3 md:px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 whitespace-nowrap border-r border-slate-200">Dimensions (Inches)</th>
                     <th style={mono} className="py-3 px-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Description</th>
                   </tr>
                 </thead>
@@ -141,18 +141,18 @@ export function ProductContentTemplateV2({ data: content, productId, whatsappMes
                   {content.tableRows.map((row, i) => (
                     <tr key={i}>
                       {row.category && (
-                        <td className="py-2.5 px-5 text-[15px] font-medium align-middle border-r border-slate-200" style={{ color: INK }} rowSpan={row.rowSpan || 1}>
+                        <td className="py-2.5 px-3 md:px-5 text-[15px] font-medium align-middle border-r border-slate-200" style={{ color: INK }} rowSpan={row.rowSpan || 1}>
                           {row.category}
                         </td>
                       )}
-                      <td className="py-2.5 px-5 text-[15px] font-semibold whitespace-nowrap align-middle border-r border-slate-200" style={{ color: INK }}>
+                      <td className="py-2.5 px-3 md:px-5 text-[15px] font-semibold whitespace-nowrap align-middle border-r border-slate-200" style={{ color: INK }}>
                         {row.size}
                       </td>
-                      <td style={mono} className="py-2.5 px-5 text-[13.5px] text-slate-600 whitespace-nowrap align-middle tabular-nums border-r border-slate-200">
+                      <td style={mono} className="py-2.5 px-3 md:px-5 text-[13.5px] text-slate-600 whitespace-nowrap align-middle tabular-nums border-r border-slate-200">
                         {row.dimensions}
                       </td>
                       {row.description && (
-                        <td className="py-2.5 px-5 text-[15px] leading-[1.6] text-slate-600 align-middle" rowSpan={row.rowSpan || 1}>
+                        <td className="py-2.5 px-3 md:px-5 text-[15px] leading-[1.6] text-slate-600 align-middle" rowSpan={row.rowSpan || 1}>
                           {row.description}
                         </td>
                       )}
@@ -253,7 +253,7 @@ export function ProductContentTemplateV2({ data: content, productId, whatsappMes
 
       {/* CTA — warm amber wash, matching the rest of the app */}
       <section className="mt-12 md:mt-16">
-        <div className="rounded-2xl px-8 py-10 md:px-14 md:py-12 text-center bg-[#fffbeb] border border-amber-200">
+        <div className="rounded-2xl px-5 py-8 md:px-14 md:py-12 text-center bg-[#fffbeb] border border-amber-200">
           <h3 style={serif} className="text-[26px] md:text-[30px] font-semibold leading-[1.2] [text-wrap:balance] mb-4">
             <span style={{ color: INK }}>{content.ctaTitle || 'Request a custom quote'}</span>
           </h3>
