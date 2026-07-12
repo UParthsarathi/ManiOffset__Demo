@@ -138,17 +138,15 @@ function ProductsContent() {
               {filteredProducts.map((product) => (
                 <Link href={`/product/${product.id}`} key={product.id} className="group flex flex-col bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                   {/* Image Section */}
-                  <div className="relative aspect-[4/3] w-full bg-[#f8f9fa] border-b border-slate-100 p-6 flex items-center justify-center">
-                    <div className="relative w-full h-full">
-                      <Image 
-                        src={product.imageUrl}
-                        alt={product.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                        className="object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 ease-out"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
+                  <div className="relative aspect-[4/3] w-full bg-[#f8f9fa] border-b border-slate-100 overflow-hidden">
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                   
                   {/* Content Section */}
