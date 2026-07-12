@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import { products } from "@/lib/data";
+import { productMeta } from "@/lib/product-meta";
 import StructuredData from "@/components/StructuredData";
 import { generateProductSchema } from "@/lib/seo";
 import { Metadata } from "next";
@@ -18,9 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     return { title: 'Product Not Found' };
   }
 
+  const meta = productMeta[product.id];
   return {
-    title: `${product.title} Printing Services | FeelThePRINT`,
-    description: product.description,
+    title: meta ? { absolute: meta.title } : `${product.title} Printing Services | FeelThePRINT`,
+    description: meta?.description ?? product.description,
   };
 }
 
@@ -40,10 +42,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       <StructuredData data={structuredData} />
       <Navbar />
 
-      {/* Breadcrumb */}
-      <div className="pt-8 pb-4 px-4 sm:px-6 lg:px-8 max-w-[1536px] mx-auto w-full">
-        <BackButton />
-        <div className="flex flex-wrap items-center text-sm text-gray-500 mt-2">
+      {/* Navigation — back + breadcrumb on one line */}
+      <div className="pt-7 pb-5 px-4 sm:px-6 lg:px-8 max-w-[1536px] mx-auto w-full flex flex-wrap items-center gap-x-3 gap-y-1">
+        <BackButton href={`/products?category=${encodeURIComponent(product.category)}`} className="mb-0" />
+        <span className="h-4 w-px bg-slate-200 hidden sm:block" aria-hidden="true"></span>
+        <div className="flex flex-wrap items-center text-sm text-gray-500">
           <Link href="/" className="hover:text-gray-900">Home</Link>
           <span className="mx-2">›</span>
           <Link href="/products" className="hover:text-gray-900">Products</Link>

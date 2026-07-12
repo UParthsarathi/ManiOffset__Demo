@@ -17,7 +17,7 @@ import {
 import { useRouter } from "next/navigation";
 import { SearchWidget } from "./SearchWidget";
 import { products } from "@/lib/data";
-import { createClient } from "@/lib/supabase/client";
+// import { createClient } from "@/lib/supabase/client"; // backend disabled for frontend-only preview
 
 export function Navbar() {
   const router = useRouter();
@@ -25,20 +25,21 @@ export function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsAdmin(!!session);
-    });
-    
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setIsAdmin(!!session);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
+  // Backend disabled for frontend-only preview — re-enable when Supabase env vars are set
+  // useEffect(() => {
+  //   const supabase = createClient();
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setIsAdmin(!!session);
+  //   });
+  //
+  //   const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+  //     setIsAdmin(!!session);
+  //   });
+  //
+  //   return () => {
+  //     subscription.unsubscribe();
+  //   };
+  // }, []);
 
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
 

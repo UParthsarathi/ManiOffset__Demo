@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about Mani Offset, the premier commercial offset printing enterprise in Sivakasi, South India.',
+  description: 'Learn about Mani Offset, a Chennai-based commercial offset printing company serving publishers, schools and businesses across India since 1995.',
 };
 
 export default function AboutPage() {
@@ -25,7 +25,7 @@ export default function AboutPage() {
           Crafting Precision at Industrial Scale. Three decades of print perfection.
         </p>
         <p className="mb-8">
-          Welcome to Mani Offset Press, the expansive parent enterprise powering the digital storefront FeelThePrint. Situated in the heart of Sivakasi, South India&apos;s historic printing hub, we have operated as the silent backbone for high-volume commercial offset printing operations for nearly three decades. We seamlessly bridge the heritage of tactile craftsmanship with the relentless efficiency of an ultra-modern, automated supply chain—delivering unmatched structural quality, razor-sharp color fidelity, and absolute logistical reliability to our national and international partners.
+          Welcome to Mani Offset Press, the expansive parent enterprise powering the digital storefront FeelThePrint. Based in Chennai, Tamil Nadu, we have operated as the silent backbone for high-volume commercial offset printing operations for nearly three decades. We seamlessly bridge the heritage of tactile craftsmanship with the relentless efficiency of an ultra-modern, automated supply chain—delivering unmatched structural quality, razor-sharp color fidelity, and absolute logistical reliability to our national and international partners.
         </p>
 
         <div className="relative aspect-[21/9] rounded overflow-hidden shadow-sm border border-slate-200 mb-10">

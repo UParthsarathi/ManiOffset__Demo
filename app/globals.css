@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+/* Map next/font variables (set on <html> in app/layout.tsx) to Tailwind's
+   font utilities — without this, font-sans/serif/mono fall back to system fonts
+   and the loaded Inter / Playfair Display / JetBrains Mono are never used. */
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+}
