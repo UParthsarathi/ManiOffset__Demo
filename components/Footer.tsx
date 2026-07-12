@@ -1,19 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Book, Mail, MapPin, PhoneCall, ArrowUp } from "lucide-react";
-
-  import { useRouter } from "next/navigation";
+import { Mail, MapPin, PhoneCall, ArrowUp, Clock } from "lucide-react";
 
 export function Footer() {
-  const router = useRouter();
-
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleScrollToCalculator = () => {
-    router.push("/calculator");
   };
 
   return (
@@ -52,7 +44,7 @@ export function Footer() {
           <div className="space-y-3 pt-2 text-xs md:text-sm text-slate-400">
             <div className="flex items-start gap-2.5">
               <MapPin className="w-4 h-4 text-[#f29a1b] shrink-0 mt-0.5" />
-              <span>FeelThePRINT, Chennai, Tamil Nadu, India.</span>
+              <span>115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram, Chennai — 600077</span>
             </div>
             <div className="flex items-center gap-2.5">
               <PhoneCall className="w-4 h-4 text-[#f29a1b] shrink-0" />
@@ -61,6 +53,10 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <Mail className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>contact@feeltheprint.com</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Clock className="w-4 h-4 text-[#f29a1b] shrink-0" />
+              <span>Mon–Sat, 9:30 AM – 7:00 PM</span>
             </div>
           </div>
 
@@ -84,60 +80,80 @@ export function Footer() {
         {/* Right Columns (3 link directories) - 8 columns wide */}
         <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
           
-          {/* Links 1: LET US HELP */}
+          {/* Links 1: POPULAR PRODUCTS */}
           <div className="space-y-4">
             <h4 className="text-white text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
-              LET US HELP
+              POPULAR PRODUCTS
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  My Account
-                </button>
+                <Link href="/product/1" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Softcover Books
+                </Link>
               </li>
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Track Order
-                </button>
+                <Link href="/product/2" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Hardcover Books
+                </Link>
               </li>
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Shipping Policy
-                </button>
+                <Link href="/product/8" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Academic Diaries
+                </Link>
               </li>
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Direct Callback FAQ
-                </button>
+                <Link href="/product/23" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Certificates & Award Cards
+                </Link>
+              </li>
+              <li>
+                <Link href="/product/3" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Magazines & Journals
+                </Link>
+              </li>
+              <li>
+                <Link href="/product/16" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Wall Calendars
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Links 2: OUR PRODUCTS */}
+          {/* Links 2: CATEGORIES */}
           <div className="space-y-4">
             <h4 className="text-white text-xs sm:text-sm font-black tracking-widest uppercase font-mono">
-              OUR PRODUCTS
+              CATEGORIES
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Books & Paperbacks
-                </button>
+                <Link href="/products?category=Books%20and%20Publications" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Books & Publications
+                </Link>
               </li>
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Stationery & Cards
-                </button>
+                <Link href="/products?category=Academic%20and%20Educational" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Academic & Educational
+                </Link>
               </li>
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Flyers & Leaflets
-                </button>
+                <Link href="/products?category=Marketing%20and%20Promotional%20Materials" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Marketing & Promotional
+                </Link>
               </li>
               <li>
-                <button onClick={handleScrollToCalculator} className="hover:text-[#f29a1b] hover:font-semibold transition-all cursor-pointer">
-                  Academic Diaries
-                </button>
+                <Link href="/products?category=Business%20and%20Corporate" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Business & Corporate
+                </Link>
+              </li>
+              <li>
+                <Link href="/products?category=Banking%20and%20Financial" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Banking & Financial
+                </Link>
+              </li>
+              <li>
+                <Link href="/products?category=Product%20Support%20Materials" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Product Support
+                </Link>
               </li>
             </ul>
           </div>
@@ -154,18 +170,28 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#careers" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                <Link href="/press/process" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Our Process
+                </Link>
+              </li>
+              <li>
+                <Link href="/about/careers" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
                   Careers at Press
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                <Link href="/about/sustainability" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Sustainability
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact/corporate" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="#environmental" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
-                  Sustainable Foresting
+                <Link href="/calculator" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Price Calculator
                 </Link>
               </li>
             </ul>
