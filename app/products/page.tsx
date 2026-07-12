@@ -28,7 +28,7 @@ function ProductsContent() {
       const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             product.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
-    }).sort((a, b) => a.title.localeCompare(b.title));
+    });
   }, [selectedCategory, searchQuery]);
 
   // Compute category counts
