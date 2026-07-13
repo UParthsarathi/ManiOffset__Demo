@@ -73,18 +73,18 @@ export function MobileFlipBook({ onClose }: { onClose?: () => void }) {
         const pageCount = flip.getPageCount();
 
         if (dx < 0) {
-          // Swipe left -> Next Page
-          if (currentIndex >= pageCount - 1) {
-            if (onClose) onClose();
-          } else {
-            flip.flipNext();
-          }
-        } else {
-          // Swipe right -> Previous Page 
+          // Swipe left -> Previous Page
           if (currentIndex <= 0) {
             if (onClose) onClose();
           } else {
             flip.flipPrev();
+          }
+        } else {
+          // Swipe right -> Next Page
+          if (currentIndex >= pageCount - 1) {
+            if (onClose) onClose();
+          } else {
+            flip.flipNext();
           }
         }
       }
@@ -119,7 +119,7 @@ export function MobileFlipBook({ onClose }: { onClose?: () => void }) {
 
       {/* Main Flipbook wrapper */}
       <div 
-        className="w-full h-full pt-20 pb-24 px-4 flex justify-center items-center perspective-[2000px] relative z-[80]"
+        className="w-full h-full pt-20 pb-24 px-4 flex justify-center items-center perspective-[2000px] relative z-[80] touch-pan-y overscroll-contain"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

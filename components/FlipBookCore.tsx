@@ -38,7 +38,7 @@ const CategoryList = ({ category, selectedItem, onSelect, onItemClick, subtitle,
          
          <div className="w-full flex-1 flex flex-col justify-start gap-2 mt-1 overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
                <div className="mb-2 w-full flex-1 flex flex-col items-start pr-2">
-                 <h3 className={`text-lg sm:text-xl md:text-2xl font-serif font-medium mb-3 sm:mb-5 leading-[1.1] tracking-tight ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`}>
+                 <h3 className={`text-lg sm:text-xl md:text-2xl font-sans font-medium mb-3 sm:mb-5 leading-[1.1] tracking-tight ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`}>
                    {category.title}
                  </h3>
                  <div className="flex flex-col w-full">
@@ -55,7 +55,7 @@ const CategoryList = ({ category, selectedItem, onSelect, onItemClick, subtitle,
                         <span className={`text-[8px] sm:text-[9px] md:text-[10px] font-sans font-bold tracking-[0.15em] transition-all duration-500 w-6 sm:w-8 ${selectedItem?.id === item.id ? (isDark ? 'text-[#d4af37] opacity-100' : 'text-[#9c7c38] opacity-100') : (isDark ? 'text-white/60 group-hover:text-[#d4af37]/80' : 'text-black/60 group-hover:text-[#d4af37]/80')}`}>
                           {(idx + 1).toString().padStart(2, '0')}
                         </span>
-                        <span className={`text-[12px] sm:text-[14px] md:text-[16px] font-serif transition-colors duration-300 flex-1 pl-1 sm:pl-2 ${selectedItem?.id === item.id ? (isDark ? 'text-[#d4af37] transform translate-x-1 sm:translate-x-2' : 'text-[#d4af37] transform translate-x-1 sm:translate-x-2 font-medium') : (isDark ? 'text-white group-hover:text-[#d4af37]/90 group-hover:translate-x-1' : 'text-black group-hover:text-[#d4af37]/90 group-hover:translate-x-1')}`}>
+                        <span className={`text-[12px] sm:text-[14px] md:text-[16px] font-sans transition-colors duration-300 flex-1 pl-1 sm:pl-2 ${selectedItem?.id === item.id ? (isDark ? 'text-[#d4af37] transform translate-x-1 sm:translate-x-2' : 'text-[#d4af37] transform translate-x-1 sm:translate-x-2 font-medium') : (isDark ? 'text-white group-hover:text-[#d4af37]/90 group-hover:translate-x-1' : 'text-black group-hover:text-[#d4af37]/90 group-hover:translate-x-1')}`}>
                           {item.title}
                         </span>
                         
@@ -69,7 +69,7 @@ const CategoryList = ({ category, selectedItem, onSelect, onItemClick, subtitle,
          </div>
 
          <div className={`mt-auto pt-6 w-full flex justify-between items-center opacity-60 ${isDark ? 'border-white/10' : 'border-black/10'} border-t`}>
-            <span className={`font-serif text-[9px] sm:text-[10px] tracking-widest italic ${isDark ? 'text-white' : 'text-black'}`}>feeltheprint.</span>
+            <span className={`font-sans text-[9px] sm:text-[10px] tracking-widest italic ${isDark ? 'text-white' : 'text-black'}`}>feeltheprint.</span>
             <span className={`font-sans text-[7px] sm:text-[8px] tracking-[0.25em] uppercase font-semibold ${isDark ? 'text-white' : 'text-black'}`}>Est. 1995</span>
          </div>
       </div>
@@ -111,7 +111,7 @@ const ImageDisplay = ({ item, subtitle, onItemClick, isDark = false, spine = "ri
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 p-4 text-left pointer-events-none z-10">
                 <span className="text-[8px] uppercase tracking-widest text-[#f29a1b] font-bold mb-1 block">Selected Product</span>
-                <h4 className="text-white font-serif font-bold text-sm leading-tight drop-shadow-md">
+                <h4 className="text-white font-sans font-bold text-sm leading-tight drop-shadow-md">
                    {item.title}
                 </h4>
               </div>
@@ -234,8 +234,8 @@ export function FlipBookCore({ onClose }: { onClose?: () => void }) {
                 {/* Book Cover Frame */}
                 <div className="absolute inset-[12px] md:inset-[16px] border border-[#d4af37]/20 rounded-sm z-10 pointer-events-none" />
                 <div className="absolute inset-[16px] md:inset-[20px] border border-[#d4af37]/10 rounded-sm z-10 pointer-events-none" />
-                
-                <div className="pl-10 md:pl-12 p-8 sm:p-10 md:p-12 h-full flex flex-col justify-between relative z-10 text-white font-serif">
+
+                <div className="pl-10 md:pl-12 p-8 sm:p-10 md:p-12 h-full flex flex-col justify-between relative z-10 text-white font-sans">
                   <div>
                     <div className="flex items-center gap-4 mb-8">
                       <div className="w-8 h-[1px] bg-gradient-to-r from-[#d4af37] to-transparent" />
@@ -348,7 +348,7 @@ export function FlipBookCore({ onClose }: { onClose?: () => void }) {
                
                <div className="flex flex-col items-center text-center px-10 relative z-20">
                   <div className="w-6 h-[1px] bg-[#9c7c38] mb-6" />
-                  <h3 className="font-serif text-[22px] sm:text-[26px] font-medium leading-[1.1] tracking-tight text-[#0a0a0a] mb-4">
+                  <h3 className="font-sans text-[22px] sm:text-[26px] font-medium leading-[1.1] tracking-tight text-[#0a0a0a] mb-4">
                     Ready to elevate<br/>your brand?
                   </h3>
                   <p className="font-sans text-[7px] sm:text-[8px] tracking-[0.25em] uppercase font-bold text-[#9c7c38] mb-8">
@@ -362,7 +362,7 @@ export function FlipBookCore({ onClose }: { onClose?: () => void }) {
                </div>
 
                <div className="absolute bottom-10 w-full flex justify-center opacity-40">
-                  <span className="font-serif text-[10px] sm:text-[11px] italic text-[#0a0a0a]">Fin.</span>
+                  <span className="font-sans text-[10px] sm:text-[11px] italic text-[#0a0a0a]">Fin.</span>
                </div>
             </div>
           </Page>
@@ -376,12 +376,12 @@ export function FlipBookCore({ onClose }: { onClose?: () => void }) {
                 
                 {/* Back Cover Frame */}
                 <div className="absolute inset-[12px] md:inset-[16px] border border-[#d4af37]/10 rounded-sm z-10 pointer-events-none" />
-                
+
                 <div className="w-full h-full flex flex-col items-center justify-center relative z-20 space-y-6">
                     <div className="w-4 h-4 rounded-full border border-[#d4af37]/30 flex items-center justify-center mb-2">
                        <div className="w-1 h-1 bg-[#d4af37]/50 rounded-full" />
                     </div>
-                    <span className="font-serif text-white/50 text-[20px] sm:text-[24px] tracking-wide mb-2 opacity-80 mix-blend-plus-lighter">feeltheprint.</span>
+                    <span className="font-sans text-white/50 text-[20px] sm:text-[24px] tracking-wide mb-2 opacity-80 mix-blend-plus-lighter">feeltheprint.</span>
                     <div className="flex flex-col items-center gap-2">
                        <div className="w-6 h-[1px] bg-[#d4af37]/20" />
                        <span className="text-[#d4af37]/60 text-[6px] sm:text-[7px] uppercase tracking-[0.4em] font-sans font-bold">Studio Edition // 04</span>
