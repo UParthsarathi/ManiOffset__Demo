@@ -7,6 +7,8 @@ import Link from 'next/link';
 export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: number, rawWhatsappMessage: string }) {
   const [pages, setPages] = useState('');
   const [quantity, setQuantity] = useState('');
+  // Only paged products (ids 1-10: books + paged academic items) ask for a page count
+  const showPages = productId <= 10;
 
   const buildWhatsappUrl = () => {
     let msg = rawWhatsappMessage;
@@ -15,7 +17,7 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
       if (pages) msg += `\n- Pages: ${pages}`;
       if (quantity) msg += `\n- Copies: ${quantity}`;
     }
-    return `https://wa.me/919791183612?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/919444409824?text=${encodeURIComponent(msg)}`;
   };
 
   const calculatorUrl = `/calculator?product=${productId}${pages ? `&pages=${pages}` : ''}${quantity ? `&quantity=${quantity}` : ''}`;
@@ -23,6 +25,7 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-5">
+        {showPages && (
         <div className="w-full">
           <label className="block text-sm font-semibold text-gray-900 mb-2">Pages</label>
           <div className="relative">
@@ -36,6 +39,7 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
             />
           </div>
         </div>
+        )}
         <div className="w-full">
           <label className="block text-sm font-semibold text-gray-900 mb-2">Copies</label>
           <div className="relative">

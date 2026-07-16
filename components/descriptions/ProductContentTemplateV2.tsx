@@ -262,7 +262,7 @@ export function ProductContentTemplateV2({ data: content, productId, whatsappMes
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a
-              href={`https://wa.me/919791183612?text=${whatsappMessage}`}
+              href={`https://wa.me/919444409824?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-[15px] rounded-lg transition-all w-full sm:w-auto"

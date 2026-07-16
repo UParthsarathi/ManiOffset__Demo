@@ -255,7 +255,7 @@ export function ProductContentTemplate({ data: content, productId, whatsappMessa
               Get an Instant Quote
             </Link>
             <a 
-              href={`https://wa.me/919791183612?text=${whatsappMessage}`}
+              href={`https://wa.me/919444409824?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all"

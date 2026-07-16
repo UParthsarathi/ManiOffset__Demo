@@ -67,7 +67,7 @@ Business location: **Chennai (Vanagaram, 600077)** — NOT Sivakasi. Volumes sho
 
 ## Local SEO (covers ALL "near me" keywords — ~200 rows of the sheet)
 
-- Google Business Profile: name "FeelThePRINT", category *Offset printing service / Commercial printer*, address 115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram, Chennai 600077, phone +91 97911 83612 — keep identical everywhere (NAP consistency).
+- Google Business Profile: name "FeelThePRINT", category *Offset printing service / Commercial printer*, address 115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram, Chennai 600077, phone +91 94444 09824 — keep identical everywhere (NAP consistency).
 - `LocalBusiness` schema in `lib/seo.ts` — ✅ corrected (Chennai geo 13.0554668, 80.1424155).
 - Mention "Chennai" naturally once per page (e.g., "printed at our Chennai facility, delivered across India").
 

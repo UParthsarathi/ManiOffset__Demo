@@ -8,7 +8,7 @@ export const generateOrganizationSchema = () => {
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'contact@feeltheprint.com',
-      telephone: '+91-97911-83612',
+      telephone: '+91-94444-09824',
       contactType: 'customer service',
       availableLanguage: ['English', 'Tamil'],
     },
@@ -28,7 +28,7 @@ export const generateLocalBusinessSchema = () => {
       '@id': 'https://feeltheprint.com/#business',
       url: 'https://feeltheprint.com',
       email: 'contact@feeltheprint.com',
-      telephone: '+91-97911-83612',
+      telephone: '+91-94444-09824',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram',

@@ -240,7 +240,7 @@ export function Navbar() {
               <Phone className="w-4.5 h-4.5" />
             </div>
             <div className="flex flex-col font-sans">
-              <span className="text-sm font-black text-white leading-tight">+91 97911 83612</span>
+              <span className="text-sm font-black text-white leading-tight">+91 94444 09824</span>
               <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold leading-none">For Orders Call</span>
             </div>
           </div>
@@ -300,7 +300,7 @@ export function Navbar() {
               Get Custom Quote
             </button>
             <a 
-              href="tel:+919791183612"
+              href="tel:+919444409824"
               className="px-4 py-2.5 bg-white/5 border border-white/10 text-white rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1 cursor-pointer hover:bg-white/10"
             >
               <Phone className="w-3.5 h-3.5 text-amber-400" />
