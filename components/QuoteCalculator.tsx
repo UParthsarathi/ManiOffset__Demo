@@ -20,6 +20,68 @@ const safeQuote = (spec: QuoteInput): QuoteResult | null => {
   try { return quote(spec); } catch { return null; }
 };
 
+// Trimmed book sizes in cm (W × H). A5/A4 are ISO-exact; the trade sizes are derived
+// from the owner's parent-sheet dimensions + published Indian trade sizes — owner to
+// confirm, especially Royal (his sheet costs it on Crown paper like a quarto).
+const SIZE_CM: Record<Size, [number, number]> = {
+  '1/8 Demy': [14, 21.5],
+  '1/8 Crown': [12.5, 18.5],
+  'A5': [14.8, 21],
+  '1/4 Demy': [22, 28],
+  '1/4 Crown': [18.5, 24.5],
+  'Royal': [19, 24.5],
+  'A4': [21, 29.7],
+};
+
+// Buildable page ranges per binding — stated on the owner's rate card (his sheet
+// notes them but doesn't enforce; we enforce here so customers can't order the unbuildable)
+const PAGE_LIMITS: Record<Binding, [number, number]> = {
+  'Perfect Binding': [40, 1496],
+  'Saddle Stitch': [8, 96],
+  'Side Pin': [8, 96],
+  'Spiral': [16, 196],
+  'Wire O': [16, 196],
+  'Case Binding': [64, 1496],
+};
+
+function BookPreview({ size, pages }: { size: Size; pages: number }) {
+  const [w, h] = SIZE_CM[size];
+  const thickCm = Math.max(0.4, pages * 0.006); // ≈0.06 mm bulk per page
+  const S = 4; // px per cm
+  const W = w * S, H = h * S, T = Math.min(thickCm * S, 44);
+  return (
+    <div className="flex items-center gap-6">
+      <div className="h-36 w-40 flex items-center justify-center shrink-0" style={{ perspective: '900px' }}>
+        <div
+          className="relative transition-all duration-300"
+          style={{ width: W, height: H, transformStyle: 'preserve-3d', transform: 'rotateY(-30deg) rotateX(4deg)' }}
+        >
+          {/* page block (back) */}
+          <div className="absolute inset-0 bg-slate-100 rounded-r-sm" />
+          {/* spine */}
+          <div
+            className="absolute top-0 left-0 h-full bg-slate-800 transition-all duration-300"
+            style={{ width: Math.max(T, 2), transformOrigin: 'left center', transform: 'rotateY(-90deg)' }}
+          />
+          {/* front cover */}
+          <div
+            className="absolute inset-0 rounded-r-sm bg-gradient-to-br from-slate-700 to-slate-900 p-2 flex flex-col justify-end gap-1 transition-all duration-300"
+            style={{ transform: `translateZ(${Math.max(T, 2)}px)` }}
+          >
+            <div className="h-1.5 w-3/4 bg-white/25 rounded-full" />
+            <div className="h-1 w-1/2 bg-white/15 rounded-full" />
+          </div>
+        </div>
+      </div>
+      <div className="text-sm">
+        <p className="font-bold text-slate-900">{size}</p>
+        <p className="text-slate-600 font-mono">{w} × {h} cm</p>
+        <p className="text-xs text-slate-400 mt-1">≈ {thickCm.toFixed(1)} cm spine at {pages} pages</p>
+      </div>
+    </div>
+  );
+}
+
 function OptionPills<T extends string>({ options, value, onChange }: {
   options: readonly T[]; value: T; onChange: (v: T) => void;
 }) {
@@ -64,7 +126,8 @@ export function QuoteCalculator() {
   const selectedProduct = productId ? products.find(p => String(p.id) === productId) : null;
 
   const [pages, setPages] = useState(queryPages ? Math.max(8, Number(queryPages)) : 88);
-  const [copies, setCopies] = useState(queryQuantity ? snapToSlab(Number(queryQuantity)) : 2000);
+  const [copiesInput, setCopiesInput] = useState(queryQuantity ? Number(queryQuantity) || 2000 : 2000);
+  const copies = snapToSlab(copiesInput); // rate card prices exact press runs only
   const [size, setSize] = useState<Size>('1/8 Demy');
   const [innerColor, setInnerColor] = useState<InnerColor>('4 Color');
   const [innerPaper, setInnerPaper] = useState<InnerPaper>('70 GSM NS Maplitho');
@@ -78,18 +141,14 @@ export function QuoteCalculator() {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', organization: '' });
 
   const spec: QuoteInput = { pages, copies, size, innerColor, innerPaper, wrapperType, wrapperBoard, binding };
+  const [minPages, maxPages] = PAGE_LIMITS[binding];
+  const pageLimitError = pages < minPages || pages > maxPages
+    ? `${binding} works for ${minPages}–${maxPages} pages — adjust the page count or pick another binding.`
+    : '';
   let q: QuoteResult | null = null;
   let quoteError = '';
   try { q = quote(spec); } catch (e) { quoteError = e instanceof Error ? e.message : String(e); }
-
-  const breakdown: [string, number][] = q ? [
-    ['Plates & inner printing', q.printing],
-    ['Cover printing', q.wrapperPrinting],
-    ['Inner paper', q.innerPaper],
-    ['Cover board', q.board],
-    ['Lamination', q.lamination],
-    ['Binding', q.binding],
-  ] : [];
+  if (pageLimitError) q = null;
 
   const handleSubmitQuote = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,24 +237,28 @@ export function QuoteCalculator() {
               <div className="space-y-2">
                 <label className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Copies
-                  <span className="text-[10px] text-slate-400 font-normal normal-case">standard press runs</span>
+                  <span className="text-[10px] text-slate-400 font-normal normal-case">min {inr(COPIES_SLABS[0])}</span>
                 </label>
-                <select
-                  value={copies}
-                  onChange={(e) => setCopies(Number(e.target.value))}
-                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors appearance-none cursor-pointer font-mono text-base"
-                >
-                  {COPIES_SLABS.map((s) => (
-                    <option key={s} value={s}>{inr(s)}</option>
-                  ))}
-                </select>
+                <input
+                  type="number"
+                  min={COPIES_SLABS[0]}
+                  max={COPIES_SLABS[COPIES_SLABS.length - 1]}
+                  value={copiesInput}
+                  onChange={(e) => setCopiesInput(Math.max(0, Math.round(Number(e.target.value) || 0)))}
+                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-mono text-base"
+                />
+                {copies !== copiesInput && (
+                  <p className="text-xs text-amber-700">Priced at the nearest standard press run: <strong>{inr(copies)} copies</strong></p>
+                )}
               </div>
             </div>
           </Section>
 
           <Section step={2} title="Book Size">
             <OptionPills options={SIZES} value={size} onChange={(v) => setSize(v)} />
-            <p className="text-xs text-slate-400">Demy 1/8 ≈ 5.5&quot; × 8.5&quot; (novels) · 1/4 ≈ 8.5&quot; × 11&quot; (magazines, catalogs) · A5/A4 standard</p>
+            <div className="bg-slate-50 border border-slate-100 rounded-xl px-5 py-4">
+              <BookPreview size={size} pages={pages} />
+            </div>
           </Section>
 
           <Section step={3} title="Inside Pages">
@@ -249,6 +312,9 @@ export function QuoteCalculator() {
 
           <Section step={5} title="Binding">
             <OptionPills options={BINDINGS} value={binding} onChange={(v) => setBinding(v)} />
+            <p className="text-xs text-slate-400">
+              {binding} · suits {PAGE_LIMITS[binding][0]}–{PAGE_LIMITS[binding][1]} pages
+            </p>
           </Section>
         </form>
       </div>
@@ -271,46 +337,28 @@ export function QuoteCalculator() {
           </div>
 
           {q ? (
-            <>
-              {/* Cost breakdown */}
-              <div className="px-6 py-5 space-y-2.5 border-b border-gray-100">
-                {breakdown.map(([label, amount]) => (
-                  <div key={label} className="flex justify-between text-sm">
-                    <span className="text-gray-500">{label}</span>
-                    <span className="text-gray-900 font-mono">₹{inr(amount)}</span>
-                  </div>
-                ))}
-                <div className="flex justify-between text-sm pt-2 border-t border-gray-100">
-                  <span className="text-gray-500">Subtotal</span>
-                  <span className="text-gray-900 font-mono">₹{inr(q.subtotal)}</span>
+            <div className="px-6 py-6 bg-slate-50 border-b border-gray-100">
+              <div className="flex items-end justify-between">
+                <div>
+                  <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Estimated Total</span>
+                  <span className="text-3xl font-bold text-gray-900 tracking-tight">₹{inr(q.total)}</span>
+                  <span className="block text-xs text-gray-500 mt-1">incl. 18% GST · excl. freight</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">GST 18%</span>
-                  <span className="text-gray-900 font-mono">₹{inr(q.gst)}</span>
+                <div className="text-right">
+                  <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Per Book</span>
+                  <span className="inline-flex items-center text-xl font-bold text-[#b06f0e]">
+                    <IndianRupee className="w-4 h-4" />{inr(q.perCopy, 2)}
+                  </span>
                 </div>
               </div>
-
-              <div className="px-6 py-6 bg-slate-50 border-b border-gray-100">
-                <div className="flex items-end justify-between">
-                  <div>
-                    <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Estimated Total</span>
-                    <span className="text-3xl font-bold text-gray-900 tracking-tight">₹{inr(q.total)}</span>
-                    <span className="block text-xs text-gray-500 mt-1">incl. 18% GST · excl. freight</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Per Book</span>
-                    <span className="inline-flex items-center text-xl font-bold text-[#b06f0e]">
-                      <IndianRupee className="w-4 h-4" />{inr(q.perCopy, 2)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </>
+            </div>
           ) : (
             <div className="px-6 py-8 border-b border-gray-100">
               <p className="text-sm text-gray-600 leading-relaxed">
-                This combination isn&apos;t on our standard rate card ({quoteError}). Try a different quantity or
-                binding — or request an official quote and we&apos;ll price it manually.
+                {pageLimitError || (
+                  <>This combination isn&apos;t on our standard rate card ({quoteError}). Try a different quantity or
+                  binding — or request an official quote and we&apos;ll price it manually.</>
+                )}
               </p>
             </div>
           )}
@@ -320,13 +368,13 @@ export function QuoteCalculator() {
             <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Per-book price at volume</span>
             <div className="grid grid-cols-3 gap-1.5">
               {PRICE_BREAK_QTYS.map((qty) => {
-                const bq = safeQuote({ ...spec, copies: qty });
+                const bq = pageLimitError ? null : safeQuote({ ...spec, copies: qty });
                 const active = qty === copies;
                 return (
                   <button
                     key={qty}
                     type="button"
-                    onClick={() => setCopies(qty)}
+                    onClick={() => setCopiesInput(qty)}
                     className={`rounded-lg px-2 py-2 text-center border transition-colors cursor-pointer ${
                       active ? 'border-slate-900 bg-slate-900 text-white' : 'border-gray-100 bg-gray-50 hover:border-gray-300'
                     }`}
