@@ -3,14 +3,14 @@
 import { useState } from 'react';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { PAGES_OPTIONS, COPIES_SLABS } from '@/lib/offset-pricing';
+import { PAGES_OPTIONS, COPIES_SLABS, isBookProduct } from '@/lib/offset-pricing';
 
 export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: number, rawWhatsappMessage: string }) {
   const [pages, setPages] = useState('');
   const [quantity, setQuantity] = useState('');
-  // Only paged book products (ids 1-10) ask for pages and use the calculator's
-  // press-run quantities; other products keep a free quantity field (flow TBD by owner)
-  const isBook = productId <= 10;
+  // Only paged book products ask for pages and use the calculator's press-run
+  // quantities; other products keep a free quantity field and a coming-soon calculator
+  const isBook = isBookProduct(productId);
 
   const buildWhatsappUrl = () => {
     let msg = rawWhatsappMessage;
@@ -22,7 +22,9 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
     return `https://wa.me/919444409824?text=${encodeURIComponent(msg)}`;
   };
 
-  const calculatorUrl = `/calculator?product=${productId}${pages ? `&pages=${pages}` : ''}${quantity ? `&quantity=${quantity}` : ''}`;
+  const calculatorUrl = isBook
+    ? `/calculator?product=${productId}${pages ? `&pages=${pages}` : ''}${quantity ? `&quantity=${quantity}` : ''}`
+    : '/calculator/coming-soon';
 
   return (
     <div className="space-y-6">

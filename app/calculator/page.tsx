@@ -1,16 +1,21 @@
 import React, { Suspense } from 'react';
+import { redirect } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Metadata } from 'next';
 import { QuoteCalculator } from '@/components/QuoteCalculator';
 import { BackButton } from '@/components/BackButton';
+import { isBookProduct } from '@/lib/offset-pricing';
 
 export const metadata: Metadata = {
   title: 'Book Printing Calculator',
   description: 'Get an instant estimate for offset book printing — size, paper, cover and binding priced live from our press rate card.',
 };
 
-export default function CalculatorPage() {
+export default async function CalculatorPage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
+  // The rate card prices books only — other products get the coming-soon page
+  const { product } = await searchParams;
+  if (product && !isBookProduct(Number(product))) redirect('/calculator/coming-soon');
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
       <Navbar />

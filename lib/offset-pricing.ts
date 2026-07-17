@@ -31,6 +31,33 @@ export const COPIES_SLABS = [
 // Valid page counts per the workbook's Data Validation list: 16–1496 in steps of 8
 export const PAGES_OPTIONS: readonly number[] = Array.from({ length: 186 }, (_, i) => 16 + i * 8);
 
+// Only paged book products carry this rate card; other products' pricing flow is TBD by the owner
+export const isBookProduct = (id: number) => id >= 1 && id <= 10;
+
+// Trimmed book sizes in cm (W × H). A5/A4 are ISO-exact; the trade sizes are derived
+// from the owner's parent-sheet dimensions + published Indian trade sizes — owner to
+// confirm, especially Royal (his sheet costs it on Crown paper like a quarto).
+export const SIZE_CM: Record<Size, [number, number]> = {
+  '1/8 Demy': [14, 21.5],
+  '1/8 Crown': [12.5, 18.5],
+  'A5': [14.8, 21],
+  '1/4 Demy': [22, 28],
+  '1/4 Crown': [18.5, 24.5],
+  'Royal': [19, 24.5],
+  'A4': [21, 29.7],
+};
+
+// Buildable page ranges per binding — stated on the owner's rate card (his sheet
+// notes them but doesn't enforce; the customer UI enforces so orders stay buildable)
+export const PAGE_LIMITS: Record<Binding, [number, number]> = {
+  'Perfect Binding': [40, 1496],
+  'Saddle Stitch': [8, 96],
+  'Side Pin': [8, 96],
+  'Spiral': [16, 196],
+  'Wire O': [16, 196],
+  'Case Binding': [64, 1496],
+};
+
 export type Size = (typeof SIZES)[number];
 export type InnerColor = (typeof INNER_COLORS)[number];
 export type InnerPaper = (typeof INNER_PAPERS)[number];

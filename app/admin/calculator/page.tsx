@@ -60,7 +60,7 @@ export default function AdminCalculatorPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Inputs */}
-        <div className="bg-white border border-slate-200 rounded-xl p-6 grid grid-cols-2 gap-4 h-fit">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 h-fit">
           <Field label="Pages">
             <input
               type="number" min={16} max={1496} step={8} value={pages}
@@ -103,7 +103,7 @@ export default function AdminCalculatorPage() {
               {BINDINGS.map((b) => <option key={b} value={b}>{b}</option>)}
             </select>
           </Field>
-          <p className="col-span-2 text-xs text-slate-400">
+          <p className="sm:col-span-2 text-xs text-slate-400">
             Forms: {(pages / 16).toFixed(2)} · Slab quantities 300–10,000 only, exactly as the sheet
           </p>
         </div>
