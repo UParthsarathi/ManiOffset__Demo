@@ -119,7 +119,10 @@ function Section({ step, title, children }: { step: number; title: string; child
 
 export function QuoteCalculator() {
   const searchParams = useSearchParams();
-  const productId = searchParams.get('product');
+  // Books only: the rate card covers paged, bound products (ids 1-10). Other product
+  // ids are ignored here — their flow is TBD by the owner; they keep the quote form.
+  const rawProductId = searchParams.get('product');
+  const productId = rawProductId && Number(rawProductId) <= 10 ? rawProductId : null;
   const queryPages = searchParams.get('pages');
   const queryQuantity = searchParams.get('quantity');
 
