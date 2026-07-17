@@ -44,6 +44,72 @@ const PAGE_LIMITS: Record<Binding, [number, number]> = {
   'Case Binding': [64, 1496],
 };
 
+const BINDING_DESC: Record<Binding, string> = {
+  'Perfect Binding': 'Glued square spine — the standard paperback look',
+  'Saddle Stitch': 'Folded sheets stapled through the spine fold',
+  'Side Pin': 'Stapled through the front, near the spine edge',
+  'Spiral': 'Plastic coil through punched holes — lies flat open',
+  'Wire O': 'Twin-loop wire binding — lies flat, premium feel',
+  'Case Binding': 'Rigid hardcover boards — the premium option',
+};
+
+const cardCls = (active: boolean, disabled = false) =>
+  `p-4 rounded-xl border transition-colors ${
+    disabled
+      ? 'opacity-40 cursor-not-allowed bg-slate-50 border-gray-200'
+      : active
+        ? 'border-slate-900 bg-slate-50 ring-1 ring-slate-900 cursor-pointer'
+        : 'border-gray-200 bg-white hover:border-gray-400 cursor-pointer'
+  }`;
+
+// Placeholder line art until the owner supplies real binding photos
+function BindingGlyph({ b }: { b: Binding }) {
+  const s = { fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  return (
+    <svg viewBox="0 0 56 44" className="w-14 h-11">
+      {b === 'Perfect Binding' && (<>
+        <rect x="12" y="6" width="34" height="32" rx="2" {...s} />
+        <line x1="17" y1="6" x2="17" y2="38" {...s} />
+      </>)}
+      {b === 'Saddle Stitch' && (<>
+        <path d="M8 24 L28 12 L48 24" {...s} />
+        <path d="M8 30 L28 18 L48 30" {...s} />
+        <line x1="24" y1="13.5" x2="26" y2="12.5" {...s} />
+        <line x1="30" y1="12.5" x2="32" y2="13.5" {...s} />
+      </>)}
+      {b === 'Side Pin' && (<>
+        <rect x="12" y="6" width="34" height="32" rx="2" {...s} />
+        <circle cx="18" cy="15" r="1.4" fill="currentColor" stroke="none" />
+        <circle cx="18" cy="29" r="1.4" fill="currentColor" stroke="none" />
+      </>)}
+      {b === 'Spiral' && (<>
+        <rect x="18" y="6" width="28" height="32" rx="2" {...s} />
+        {[10, 17, 24, 31].map((y) => <circle key={y} cx="14" cy={y + 3} r="3.2" {...s} />)}
+      </>)}
+      {b === 'Wire O' && (<>
+        <rect x="18" y="6" width="28" height="32" rx="2" {...s} />
+        {[9, 16, 23, 30].map((y) => (
+          <g key={y}>
+            <circle cx="12.5" cy={y + 3} r="2.4" {...s} />
+            <circle cx="16" cy={y + 3} r="2.4" {...s} />
+          </g>
+        ))}
+      </>)}
+      {b === 'Case Binding' && (<>
+        <rect x="10" y="4" width="38" height="36" rx="1.5" {...s} />
+        <rect x="16" y="8" width="28" height="28" {...s} strokeWidth={1.4} />
+        <line x1="14" y1="4" x2="14" y2="40" {...s} />
+      </>)}
+    </svg>
+  );
+}
+
+const PAPER_DESC: Record<string, string> = {
+  'NS Maplitho': 'economy, everyday',
+  'White Maplitho': 'bright white, smooth',
+  'Art Paper': 'coated, glossy',
+};
+
 function BookPreview({ size, pages }: { size: Size; pages: number }) {
   const [w, h] = SIZE_CM[size];
   const thickCm = Math.max(0.4, pages * 0.006); // ≈0.06 mm bulk per page
@@ -82,35 +148,15 @@ function BookPreview({ size, pages }: { size: Size; pages: number }) {
   );
 }
 
-function OptionPills<T extends string>({ options, value, onChange }: {
-  options: readonly T[]; value: T; onChange: (v: T) => void;
-}) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((opt) => (
-        <button
-          key={opt}
-          type="button"
-          onClick={() => onChange(opt)}
-          className={`px-4 py-2.5 rounded-lg border text-sm font-semibold transition-colors cursor-pointer ${
-            value === opt
-              ? 'bg-slate-900 border-slate-900 text-white shadow-sm'
-              : 'bg-white border-gray-200 text-gray-700 hover:border-gray-400'
-          }`}
-        >
-          {opt}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function Section({ step, title, children }: { step: number; title: string; children: React.ReactNode }) {
+function Section({ step, title, hint, children }: { step: number; title: string; hint?: string; children: React.ReactNode }) {
   return (
     <div className="space-y-5">
-      <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
-        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold">{step}</span>
-        <h3 className="font-bold text-gray-900 uppercase tracking-widest text-xs">{title}</h3>
+      <div className="border-b border-gray-200 pb-3">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold">{step}</span>
+          <h3 className="font-bold text-gray-900 uppercase tracking-widest text-xs">{title}</h3>
+        </div>
+        {hint && <p className="text-sm text-slate-500 mt-2">{hint}</p>}
       </div>
       {children}
     </div>
@@ -222,7 +268,7 @@ export function QuoteCalculator() {
         )}
 
         <form className="space-y-10">
-          <Section step={1} title="Pages & Quantity">
+          <Section step={1} title="Pages & Quantity" hint="How big is the book, and how many copies do you need?">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="space-y-2">
                 <label className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wider">
@@ -257,14 +303,31 @@ export function QuoteCalculator() {
             </div>
           </Section>
 
-          <Section step={2} title="Book Size">
-            <OptionPills options={SIZES} value={size} onChange={(v) => setSize(v)} />
-            <div className="bg-slate-50 border border-slate-100 rounded-xl px-5 py-4">
-              <BookPreview size={size} pages={pages} />
+          <Section step={2} title="Book Size" hint="The finished, trimmed size of your book — drawn to scale.">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {SIZES.map((s) => {
+                const [w, h] = SIZE_CM[s];
+                const active = s === size;
+                const SC = 2.6; // shared px-per-cm so relative sizes are honest
+                return (
+                  <button key={s} type="button" onClick={() => setSize(s)} className={`${cardCls(active)} flex flex-col items-center gap-2`}>
+                    <span className="h-[84px] flex items-end justify-center">
+                      <span
+                        className={`relative block border-2 rounded-r-sm transition-colors ${active ? 'border-slate-900' : 'border-slate-400'}`}
+                        style={{ width: w * SC, height: h * SC }}
+                      >
+                        <span className={`absolute left-0 top-0 h-full w-[5px] ${active ? 'bg-slate-900' : 'bg-slate-400'}`} />
+                      </span>
+                    </span>
+                    <span className="text-sm font-bold text-gray-900">{s}</span>
+                    <span className="text-xs text-slate-500 font-mono">{w} × {h} cm</span>
+                  </button>
+                );
+              })}
             </div>
           </Section>
 
-          <Section step={3} title="Inside Pages">
+          <Section step={3} title="Inside Pages" hint="What the inner pages are printed in, and on.">
             <div className="space-y-5">
               <div className="grid grid-cols-2 gap-3">
                 {INNER_COLORS.map((c) => (
@@ -282,42 +345,110 @@ export function QuoteCalculator() {
                 ))}
               </div>
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Inner Paper</label>
-                <select
-                  value={innerPaper}
-                  onChange={(e) => setInnerPaper(e.target.value as InnerPaper)}
-                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors appearance-none cursor-pointer"
-                >
-                  {INNER_PAPERS.map((p) => <option key={p} value={p}>{p}</option>)}
-                </select>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Inner Paper <span className="text-slate-400 font-normal normal-case">(higher GSM = thicker sheet)</span>
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {INNER_PAPERS.map((p) => {
+                    const gsm = parseInt(p);
+                    const quality = p.split(' GSM ')[1];
+                    const active = p === innerPaper;
+                    return (
+                      <button key={p} type="button" onClick={() => setInnerPaper(p)} className={`${cardCls(active)} flex flex-col items-center gap-1.5 text-center`}>
+                        <span
+                          className={`block w-10 rounded-sm ${active ? 'bg-slate-900' : 'bg-slate-300'}`}
+                          style={{ height: Math.round(gsm / 18) }}
+                        />
+                        <span className="text-sm font-bold text-gray-900">{gsm} GSM</span>
+                        <span className="text-xs text-gray-700">{quality}</span>
+                        <span className="text-[10px] text-slate-400">{PAPER_DESC[quality]}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </Section>
 
-          <Section step={4} title="Cover">
+          <Section step={4} title="Cover" hint="The printed, laminated wrapper that goes around your book.">
             <div className="space-y-5">
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Cover Style <span className="text-slate-400 font-normal normal-case">(Flap doubles the board)</span></label>
-                <OptionPills options={WRAPPER_TYPES} value={wrapperType} onChange={(v) => setWrapperType(v)} />
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Cover Style</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {WRAPPER_TYPES.map((wt) => {
+                    const active = wt === wrapperType;
+                    const flap = wt === 'Flap';
+                    return (
+                      <button key={wt} type="button" onClick={() => setWrapperType(wt)} className={`${cardCls(active)} flex items-center gap-4 text-left`}>
+                        <svg viewBox="0 0 64 44" className={`w-16 h-11 shrink-0 ${active ? 'text-slate-900' : 'text-slate-400'}`}>
+                          <rect x={flap ? 20 : 14} y="6" width="28" height="32" rx="2" fill="none" stroke="currentColor" strokeWidth="2.2" />
+                          {flap && (<>
+                            <rect x="8" y="9" width="12" height="26" fill="none" stroke="currentColor" strokeWidth="1.6" strokeDasharray="3 3" />
+                            <rect x="48" y="9" width="9" height="26" fill="none" stroke="currentColor" strokeWidth="1.6" strokeDasharray="3 3" />
+                          </>)}
+                        </svg>
+                        <span>
+                          <span className="block text-sm font-bold text-gray-900">{wt}</span>
+                          <span className="block text-xs text-gray-500 mt-0.5">
+                            {flap ? 'Folded-in flaps, like a dust jacket' : 'Standard wrap-around cover'}
+                          </span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Cover Paper / Board <span className="text-slate-400 font-normal normal-case">(4-color printed, laminated)</span></label>
-                <select
-                  value={wrapperBoard}
-                  onChange={(e) => setWrapperBoard(e.target.value as WrapperBoard)}
-                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors appearance-none cursor-pointer"
-                >
-                  {WRAPPER_BOARDS.map((w) => <option key={w} value={w}>{w}</option>)}
-                </select>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Cover Paper / Board <span className="text-slate-400 font-normal normal-case">(thicker = stiffer cover)</span>
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {WRAPPER_BOARDS.map((wb) => {
+                    const gsm = parseInt(wb);
+                    const active = wb === wrapperBoard;
+                    return (
+                      <button key={wb} type="button" onClick={() => setWrapperBoard(wb)} className={`${cardCls(active)} flex flex-col items-center gap-1.5 text-center`}>
+                        <span
+                          className={`block w-12 rounded-sm ${active ? 'bg-slate-900' : 'bg-slate-300'}`}
+                          style={{ height: Math.round(gsm / 40) }}
+                        />
+                        <span className="text-sm font-bold text-gray-900">{gsm} GSM</span>
+                        <span className="text-xs text-gray-700">{wb.split(' GSM ')[1]}</span>
+                        <span className="text-[10px] text-slate-400">
+                          {gsm === 170 ? 'flexible' : gsm === 250 ? 'sturdy' : 'stiffest, most premium'}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </Section>
 
-          <Section step={5} title="Binding">
-            <OptionPills options={BINDINGS} value={binding} onChange={(v) => setBinding(v)} />
-            <p className="text-xs text-slate-400">
-              {binding} · suits {PAGE_LIMITS[binding][0]}–{PAGE_LIMITS[binding][1]} pages
-            </p>
+          <Section step={5} title="Binding" hint="How your book is held together — one of the biggest factors in its look and feel.">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {BINDINGS.map((b) => {
+                const [lo, hi] = PAGE_LIMITS[b];
+                const active = b === binding;
+                const disabled = pages < lo || pages > hi;
+                return (
+                  <button
+                    key={b}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => setBinding(b)}
+                    className={`${cardCls(active && !disabled, disabled)} flex flex-col items-start gap-1.5 text-left`}
+                  >
+                    <span className={active && !disabled ? 'text-slate-900' : 'text-slate-400'}><BindingGlyph b={b} /></span>
+                    <span className="text-sm font-bold text-gray-900">{b}</span>
+                    <span className="text-xs text-gray-500 leading-snug">{BINDING_DESC[b]}</span>
+                    <span className={`text-[10px] font-semibold ${disabled ? 'text-red-500' : 'text-slate-400'}`}>
+                      {lo}–{hi} pages{disabled ? ` · yours has ${pages}` : ''}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </Section>
         </form>
       </div>
@@ -337,6 +468,10 @@ export function QuoteCalculator() {
             <p className="text-sm text-gray-600 leading-relaxed">
               <strong className="text-gray-900">{pages} pages</strong> · <strong className="text-gray-900">{inr(copies)} copies</strong> · {size} · {innerColor === 'Black' ? 'B&W' : 'Full color'} · {binding}
             </p>
+          </div>
+
+          <div className="px-6 py-4 border-b border-gray-100 bg-slate-50/60">
+            <BookPreview size={size} pages={pages} />
           </div>
 
           {q ? (
