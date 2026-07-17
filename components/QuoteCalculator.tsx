@@ -240,7 +240,7 @@ export function QuoteCalculator() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
+    <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
 
       {/* Left Column: Configurator */}
       <div className="flex-1 space-y-10">
