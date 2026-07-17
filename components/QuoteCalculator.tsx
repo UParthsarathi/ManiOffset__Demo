@@ -240,7 +240,7 @@ export function QuoteCalculator() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
+    <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-12">
 
       {/* Left Column: Configurator */}
       <div className="flex-1 space-y-10">
@@ -302,7 +302,7 @@ export function QuoteCalculator() {
           </Section>
 
           <Section step={2} title="Book Size" hint="The finished, trimmed size of your book — drawn to scale.">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
               {SIZES.map((s) => {
                 const [w, h] = SIZE_CM[s];
                 const active = s === size;
@@ -346,7 +346,7 @@ export function QuoteCalculator() {
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Inner Paper <span className="text-slate-400 font-normal normal-case">(higher GSM = thicker sheet)</span>
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-7 gap-3">
                   {INNER_PAPERS.map((p) => {
                     const gsm = parseInt(p);
                     const quality = p.split(' GSM ')[1];
@@ -424,7 +424,7 @@ export function QuoteCalculator() {
           </Section>
 
           <Section step={5} title="Binding" hint="How your book is held together — one of the biggest factors in its look and feel.">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3">
               {BINDINGS.map((b) => {
                 const [lo, hi] = PAGE_LIMITS[b];
                 const active = b === binding;

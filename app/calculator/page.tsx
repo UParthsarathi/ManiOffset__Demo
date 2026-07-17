@@ -16,7 +16,7 @@ export default function CalculatorPage() {
       <Navbar />
       
       {/* Navbar is sticky (in flow), not fixed — no clearance padding needed */}
-      <main className="flex-1 w-full pt-8 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <main className="flex-1 w-full pt-8 pb-20 px-4 sm:px-6 lg:px-12">
         <BackButton />
         <Suspense fallback={<div className="h-[50vh] flex items-center justify-center"><div className="w-8 h-8 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" /></div>}>
           <QuoteCalculator />
