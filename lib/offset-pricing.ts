@@ -28,6 +28,9 @@ export const COPIES_SLABS = [
   5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000,
 ] as const;
 
+// Valid page counts per the workbook's Data Validation list: 16–1496 in steps of 8
+export const PAGES_OPTIONS: readonly number[] = Array.from({ length: 186 }, (_, i) => 16 + i * 8);
+
 export type Size = (typeof SIZES)[number];
 export type InnerColor = (typeof INNER_COLORS)[number];
 export type InnerPaper = (typeof INNER_PAPERS)[number];

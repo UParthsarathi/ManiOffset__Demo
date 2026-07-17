@@ -6,9 +6,11 @@ import { useSearchParams } from 'next/navigation';
 import { products } from '@/lib/data';
 import Image from 'next/image';
 import {
-  quote, snapToSlab, COPIES_SLABS, SIZES, INNER_COLORS, INNER_PAPERS, WRAPPER_TYPES, WRAPPER_BOARDS, BINDINGS,
+  quote, snapToSlab, COPIES_SLABS, PAGES_OPTIONS, SIZES, INNER_COLORS, INNER_PAPERS, WRAPPER_TYPES, WRAPPER_BOARDS, BINDINGS,
   Size, InnerColor, InnerPaper, WrapperType, WrapperBoard, Binding, QuoteInput, QuoteResult,
 } from '@/lib/offset-pricing';
+
+const snapToPages = (n: number) => Math.min(1496, Math.max(16, Math.round(n / 8) * 8));
 
 const inr = (n: number, decimals = 0) =>
   n.toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
@@ -174,7 +176,7 @@ export function QuoteCalculator() {
 
   const selectedProduct = productId ? products.find(p => String(p.id) === productId) : null;
 
-  const [pages, setPages] = useState(queryPages ? Math.max(8, Number(queryPages)) : 88);
+  const [pages, setPages] = useState(queryPages ? snapToPages(Number(queryPages) || 88) : 88);
   // Query quantity from the product page snaps once, on arrival, to the nearest press run
   const [copies, setCopies] = useState(queryQuantity ? snapToSlab(Number(queryQuantity) || 2000) : 2000);
   const [size, setSize] = useState<Size>('1/8 Demy');
@@ -273,15 +275,15 @@ export function QuoteCalculator() {
               <div className="space-y-2">
                 <label className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Pages per Copy
-                  <span className="text-[10px] text-slate-400 font-normal normal-case">multiples of 8 print best</span>
+                  <span className="text-[10px] text-slate-400 font-normal normal-case">printed in multiples of 8</span>
                 </label>
-                <input
-                  type="number"
-                  min={8}
+                <select
                   value={pages}
-                  onChange={(e) => setPages(Math.max(8, Math.round(Number(e.target.value) || 0)))}
-                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-mono text-base"
-                />
+                  onChange={(e) => setPages(Number(e.target.value))}
+                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors appearance-none cursor-pointer font-mono text-base"
+                >
+                  {PAGES_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
+                </select>
               </div>
               <div className="space-y-2">
                 <label className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wider">

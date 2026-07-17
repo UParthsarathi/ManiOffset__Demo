@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { PAGES_OPTIONS, COPIES_SLABS } from '@/lib/offset-pricing';
 
 export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: number, rawWhatsappMessage: string }) {
   const [pages, setPages] = useState('');
   const [quantity, setQuantity] = useState('');
-  // Only paged products (ids 1-10: books + paged academic items) ask for a page count
-  const showPages = productId <= 10;
+  // Only paged book products (ids 1-10) ask for pages and use the calculator's
+  // press-run quantities; other products keep a free quantity field (flow TBD by owner)
+  const isBook = productId <= 10;
 
   const buildWhatsappUrl = () => {
     let msg = rawWhatsappMessage;
@@ -25,24 +27,31 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-5">
-        {showPages && (
+        {isBook && (
         <div className="w-full">
           <label className="block text-sm font-semibold text-gray-900 mb-2">Pages</label>
-          <div className="relative">
-            <input
-              type="number"
-              inputMode="numeric"
-              value={pages}
-              onChange={(e) => setPages(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base md:text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all placeholder-gray-400 bg-gray-50/50 hover:bg-white"
-              placeholder="e.g., 100"
-            />
-          </div>
+          <select
+            value={pages}
+            onChange={(e) => setPages(e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base md:text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all bg-gray-50/50 hover:bg-white appearance-none cursor-pointer"
+          >
+            <option value="">Select pages</option>
+            {PAGES_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
+          </select>
         </div>
         )}
         <div className="w-full">
           <label className="block text-sm font-semibold text-gray-900 mb-2">Copies</label>
-          <div className="relative">
+          {isBook ? (
+            <select
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base md:text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all bg-gray-50/50 hover:bg-white appearance-none cursor-pointer"
+            >
+              <option value="">Select copies</option>
+              {COPIES_SLABS.map((c) => <option key={c} value={c}>{c.toLocaleString('en-IN')}</option>)}
+            </select>
+          ) : (
             <input
               type="number"
               inputMode="numeric"
@@ -51,7 +60,7 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base md:text-[15px] focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all placeholder-gray-400 bg-gray-50/50 hover:bg-white"
               placeholder="e.g., 500"
             />
-          </div>
+          )}
         </div>
       </div>
 
