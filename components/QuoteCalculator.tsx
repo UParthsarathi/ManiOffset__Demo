@@ -175,8 +175,8 @@ export function QuoteCalculator() {
   const selectedProduct = productId ? products.find(p => String(p.id) === productId) : null;
 
   const [pages, setPages] = useState(queryPages ? Math.max(8, Number(queryPages)) : 88);
-  const [copiesInput, setCopiesInput] = useState(queryQuantity ? Number(queryQuantity) || 2000 : 2000);
-  const copies = snapToSlab(copiesInput); // rate card prices exact press runs only
+  // Query quantity from the product page snaps once, on arrival, to the nearest press run
+  const [copies, setCopies] = useState(queryQuantity ? snapToSlab(Number(queryQuantity) || 2000) : 2000);
   const [size, setSize] = useState<Size>('1/8 Demy');
   const [innerColor, setInnerColor] = useState<InnerColor>('4 Color');
   const [innerPaper, setInnerPaper] = useState<InnerPaper>('70 GSM NS Maplitho');
@@ -286,19 +286,17 @@ export function QuoteCalculator() {
               <div className="space-y-2">
                 <label className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Copies
-                  <span className="text-[10px] text-slate-400 font-normal normal-case">min {inr(COPIES_SLABS[0])}</span>
+                  <span className="text-[10px] text-slate-400 font-normal normal-case">standard press runs</span>
                 </label>
-                <input
-                  type="number"
-                  min={COPIES_SLABS[0]}
-                  max={COPIES_SLABS[COPIES_SLABS.length - 1]}
-                  value={copiesInput}
-                  onChange={(e) => setCopiesInput(Math.max(0, Math.round(Number(e.target.value) || 0)))}
-                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-mono text-base"
-                />
-                {copies !== copiesInput && (
-                  <p className="text-xs text-amber-700">Priced at the nearest standard press run: <strong>{inr(copies)} copies</strong></p>
-                )}
+                <select
+                  value={copies}
+                  onChange={(e) => setCopies(Number(e.target.value))}
+                  className="w-full bg-white border border-gray-200 rounded-lg py-3 px-4 text-gray-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors appearance-none cursor-pointer font-mono text-base"
+                >
+                  {COPIES_SLABS.map((s) => (
+                    <option key={s} value={s}>{inr(s)}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </Section>
@@ -512,7 +510,7 @@ export function QuoteCalculator() {
                   <button
                     key={qty}
                     type="button"
-                    onClick={() => setCopiesInput(qty)}
+                    onClick={() => setCopies(qty)}
                     className={`rounded-lg px-2 py-2 text-center border transition-colors cursor-pointer ${
                       active ? 'border-slate-900 bg-slate-900 text-white' : 'border-gray-100 bg-gray-50 hover:border-gray-300'
                     }`}
