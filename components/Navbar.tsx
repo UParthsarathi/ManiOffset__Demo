@@ -18,27 +18,36 @@ import { useRouter } from "next/navigation";
 import { SearchWidget } from "./SearchWidget";
 import { products } from "@/lib/data";
 import { createClient } from "@/lib/supabase/client";
+import { ADMIN_EMAIL } from "@/lib/admin";
 
 export function Navbar() {
   const router = useRouter();
   const [showCategories, setShowCategories] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [showAccount, setShowAccount] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsAdmin(!!session);
+      setUserEmail(session?.user?.email ?? null);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setIsAdmin(!!session);
+      setUserEmail(session?.user?.email ?? null);
     });
 
     return () => {
       subscription.unsubscribe();
     };
   }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setShowAccount(false);
+    router.refresh(); // re-render server components (e.g. /account kicks back to /login)
+  };
 
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
 
@@ -245,16 +254,40 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* User/Account Profile icon */}
-          {isAdmin && (
-            <button 
-              onClick={() => router.push('/admin')}
+          {/* User/Account Profile icon — three-way: signed out / admin / customer */}
+          <div className="relative" onMouseLeave={() => setShowAccount(false)}>
+            <button
+              onClick={() => {
+                if (!userEmail) { router.push('/login'); return; }
+                if (userEmail === ADMIN_EMAIL) { router.push('/admin'); return; }
+                setShowAccount((v) => !v);
+              }}
               className="p-1 text-slate-300 hover:text-white transition-colors relative cursor-pointer"
-              title="Admin Dashboard"
+              title={!userEmail ? 'Sign In' : userEmail === ADMIN_EMAIL ? 'Admin Dashboard' : 'Account'}
             >
               <User className="w-5 h-5" />
             </button>
-          )}
+
+            {/* Customer account dropdown (styled like the categories dropdown) */}
+            {userEmail && userEmail !== ADMIN_EMAIL && showAccount && (
+              <div className="absolute right-0 top-[38px] w-60 bg-[#111111] text-slate-300 font-sans text-[13px] border border-white/5 py-1 shadow-2xl z-50 animate-fade-in origin-top-right rounded-lg">
+                <div className="px-5 py-3 border-b border-white/5 text-slate-400 text-xs truncate">{userEmail}</div>
+                <Link
+                  href="/account"
+                  onClick={() => setShowAccount(false)}
+                  className="block w-full px-5 py-3 cursor-pointer transition-colors hover:bg-[#1a1a1a] hover:text-white font-medium"
+                >
+                  My Quotes
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="w-full text-left px-5 py-3 cursor-pointer transition-colors hover:bg-[#1a1a1a] hover:text-white font-medium border-t border-white/5"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Mobile menu trigger */}
           <button 
@@ -299,13 +332,48 @@ export function Navbar() {
             >
               Get Custom Quote
             </button>
-            <a 
+            <a
               href="tel:+919444409824"
               className="px-4 py-2.5 bg-white/5 border border-white/10 text-white rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1 cursor-pointer hover:bg-white/10"
             >
               <Phone className="w-3.5 h-3.5 text-amber-400" />
               <span>Call Press</span>
             </a>
+          </div>
+
+          {/* Account (three-way: signed out / admin / customer) */}
+          <div className="pt-1 border-t border-white/10 space-y-2">
+            {!userEmail ? (
+              <button
+                onClick={() => { setShowMobileMenu(false); router.push('/login'); }}
+                className="w-full px-3 py-2.5 bg-white/5 rounded-lg border border-white/10 text-left text-xs text-slate-200 font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
+              >
+                <User className="w-3.5 h-3.5 text-amber-400" /> Sign In
+              </button>
+            ) : userEmail === ADMIN_EMAIL ? (
+              <button
+                onClick={() => { setShowMobileMenu(false); router.push('/admin'); }}
+                className="w-full px-3 py-2.5 bg-white/5 rounded-lg border border-white/10 text-left text-xs text-slate-200 font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
+              >
+                <User className="w-3.5 h-3.5 text-amber-400" /> Admin Dashboard
+              </button>
+            ) : (
+              <>
+                <div className="px-1 text-[11px] text-slate-400 truncate">{userEmail}</div>
+                <button
+                  onClick={() => { setShowMobileMenu(false); router.push('/account'); }}
+                  className="w-full px-3 py-2.5 bg-white/5 rounded-lg border border-white/10 text-left text-xs text-slate-200 font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
+                >
+                  <User className="w-3.5 h-3.5 text-amber-400" /> My Quotes
+                </button>
+                <button
+                  onClick={async () => { setShowMobileMenu(false); await handleSignOut(); }}
+                  className="w-full px-3 py-2.5 bg-white/5 rounded-lg border border-white/10 text-left text-xs text-slate-200 font-semibold hover:bg-white/10 transition-colors"
+                >
+                  Sign Out
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -1,8 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { format } from 'date-fns'
-
-const ADMIN_EMAIL = 'parthu3915@gmail.com'
+import { ADMIN_EMAIL } from '@/lib/admin'
 
 export default async function CriticalOrdersPage() {
   const supabase = await createClient()
