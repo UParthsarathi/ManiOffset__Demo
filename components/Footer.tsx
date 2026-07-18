@@ -46,14 +46,14 @@ export function Footer() {
               <MapPin className="w-4 h-4 text-[#f29a1b] shrink-0 mt-0.5" />
               <span>115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram, Chennai — 600077</span>
             </div>
-            <div className="flex items-center gap-2.5">
+            <a href="tel:+919444409824" className="flex items-center gap-2.5 hover:text-white transition-colors">
               <PhoneCall className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>+91 94444 09824</span>
-            </div>
-            <div className="flex items-center gap-2.5">
+            </a>
+            <a href="mailto:contact@feeltheprint.com" className="flex items-center gap-2.5 hover:text-white transition-colors">
               <Mail className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>contact@feeltheprint.com</span>
-            </div>
+            </a>
             <div className="flex items-center gap-2.5">
               <Clock className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>Mon–Sat, 9:30 AM – 7:00 PM</span>

@@ -134,7 +134,7 @@ function ProductsContent() {
           {filteredProducts.length === 0 ? (
              <div className="py-20 text-center text-slate-500">No products found matching your criteria.</div>
           ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <Link href={`/product/${product.id}`} key={product.id} className="group flex flex-col bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                   {/* Image Section */}
