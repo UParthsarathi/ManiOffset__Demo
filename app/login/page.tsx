@@ -87,7 +87,7 @@ function LoginContent() {
 
         <h1 className="text-2xl font-bold mb-2 text-center text-white">Welcome to Mani Offset</h1>
         <p className="text-slate-400 text-center mb-8 text-sm">
-          Sign in to your Mani Offset account.
+          Sign in to track your quotes and orders.
         </p>
 
         {message && (
