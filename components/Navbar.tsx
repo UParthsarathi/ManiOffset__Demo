@@ -46,7 +46,7 @@ export function Navbar() {
     const supabase = createClient();
     await supabase.auth.signOut();
     setShowAccount(false);
-    router.refresh(); // re-render server components (e.g. /account kicks back to /login)
+    router.refresh(); // re-render server components with the cleared session
   };
 
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
@@ -272,16 +272,9 @@ export function Navbar() {
             {userEmail && userEmail !== ADMIN_EMAIL && showAccount && (
               <div className="absolute right-0 top-[38px] w-60 bg-[#111111] text-slate-300 font-sans text-[13px] border border-white/5 py-1 shadow-2xl z-50 animate-fade-in origin-top-right rounded-lg">
                 <div className="px-5 py-3 border-b border-white/5 text-slate-400 text-xs truncate">{userEmail}</div>
-                <Link
-                  href="/account"
-                  onClick={() => setShowAccount(false)}
-                  className="block w-full px-5 py-3 cursor-pointer transition-colors hover:bg-[#1a1a1a] hover:text-white font-medium"
-                >
-                  My Quotes
-                </Link>
                 <button
                   onClick={handleSignOut}
-                  className="w-full text-left px-5 py-3 cursor-pointer transition-colors hover:bg-[#1a1a1a] hover:text-white font-medium border-t border-white/5"
+                  className="w-full text-left px-5 py-3 cursor-pointer transition-colors hover:bg-[#1a1a1a] hover:text-white font-medium"
                 >
                   Sign Out
                 </button>
@@ -360,12 +353,6 @@ export function Navbar() {
             ) : (
               <>
                 <div className="px-1 text-[11px] text-slate-400 truncate">{userEmail}</div>
-                <button
-                  onClick={() => { setShowMobileMenu(false); router.push('/account'); }}
-                  className="w-full px-3 py-2.5 bg-white/5 rounded-lg border border-white/10 text-left text-xs text-slate-200 font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
-                >
-                  <User className="w-3.5 h-3.5 text-amber-400" /> My Quotes
-                </button>
                 <button
                   onClick={async () => { setShowMobileMenu(false); await handleSignOut(); }}
                   className="w-full px-3 py-2.5 bg-white/5 rounded-lg border border-white/10 text-left text-xs text-slate-200 font-semibold hover:bg-white/10 transition-colors"
