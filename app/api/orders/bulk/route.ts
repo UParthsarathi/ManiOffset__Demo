@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     
-    if (!data.first_name || !data.email || !data.phone || !data.product_type || !data.quantity) {
+    if (!data.phone || !data.quantity) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -17,12 +17,11 @@ export async function POST(request: Request) {
       .from('bulk_orders')
       .insert({
         user_id: user?.id ?? null,
-        first_name: data.first_name,
+        first_name: data.first_name || null,
         last_name: data.last_name || null,
-        email: data.email,
+        email: data.email || null,
         phone: data.phone,
         company: data.company || null,
-        product_type: data.product_type,
         quantity: data.quantity,
         details: data.details || null
       });

@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     
-    if (!data.first_name || !data.email || !data.phone || !data.deadline || !data.product_type) {
+    if (!data.phone || !data.deadline) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -17,11 +17,10 @@ export async function POST(request: Request) {
       .from('express_orders')
       .insert({
         user_id: user?.id ?? null,
-        first_name: data.first_name,
+        first_name: data.first_name || null,
         last_name: data.last_name || null,
-        email: data.email,
+        email: data.email || null,
         phone: data.phone,
-        product_type: data.product_type,
         deadline: data.deadline,
         details: data.details || null
       });

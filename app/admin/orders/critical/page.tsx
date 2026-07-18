@@ -35,7 +35,6 @@ export default async function CriticalOrdersPage() {
               <tr>
                 <th className="px-6 py-4 font-semibold">Date</th>
                 <th className="px-6 py-4 font-semibold">Customer Details</th>
-                <th className="px-6 py-4 font-semibold">Product Type</th>
                 <th className="px-6 py-4 font-semibold">Deadline</th>
                 <th className="px-6 py-4 font-semibold">Details</th>
               </tr>
@@ -56,21 +55,20 @@ export default async function CriticalOrdersPage() {
                   <td className="px-6 py-4 align-top">
                     <div className="font-semibold text-slate-900 flex items-center gap-2 mb-1">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                      {order.first_name} {order.last_name}
+                      {[order.first_name, order.last_name].filter(Boolean).join(' ') || '—'}
                     </div>
                     <div className="text-slate-600 mt-2 flex flex-col gap-1.5 text-xs ml-6">
-                      <a href={`mailto:${order.email}`} className="hover:text-blue-600 flex items-center gap-1.5 truncate">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        {order.email}
-                      </a>
+                      {order.email && (
+                        <a href={`mailto:${order.email}`} className="hover:text-blue-600 flex items-center gap-1.5 truncate">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                          {order.email}
+                        </a>
+                      )}
                       <a href={`tel:${order.phone}`} className="hover:text-blue-600 flex items-center gap-1.5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         {order.phone}
                       </a>
                     </div>
-                  </td>
-                  <td className="px-6 py-4 align-top">
-                    <div className="font-medium text-slate-800">{order.product_type}</div>
                   </td>
                   <td className="px-6 py-4 align-top">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-red-50 text-red-700 font-semibold text-xs border border-red-100 shadow-sm">
@@ -88,7 +86,7 @@ export default async function CriticalOrdersPage() {
               
               {(!expressOrders || expressOrders.length === 0) && (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
+                  <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-3 text-slate-300"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                     <p className="text-base font-medium text-slate-600">No express orders found</p>
                     <p className="text-sm mt-1">Urgent delivery requests will appear here.</p>

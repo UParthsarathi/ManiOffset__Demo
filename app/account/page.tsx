@@ -76,7 +76,7 @@ export default async function AccountPage() {
             <div className="rounded-lg border border-slate-200 bg-white divide-y divide-slate-100">
               {expressOrders.map((o) => (
                 <div key={o.id} className="p-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <span className="text-sm font-medium text-slate-900">{o.product_type}</span>
+                  <span className="text-sm font-medium text-slate-900">Express order</span>
                   <span className="text-sm text-slate-500">Deadline: {o.deadline}</span>
                   <span className="ml-auto text-xs text-slate-400">{formatDate(o.created_at)}</span>
                 </div>
@@ -91,7 +91,7 @@ export default async function AccountPage() {
             <div className="rounded-lg border border-slate-200 bg-white divide-y divide-slate-100">
               {bulkOrders.map((o) => (
                 <div key={o.id} className="p-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <span className="text-sm font-medium text-slate-900">{o.product_type}</span>
+                  <span className="text-sm font-medium text-slate-900">Bulk order</span>
                   <span className="text-sm text-slate-500">
                     Qty: {o.quantity}{o.company ? ` · ${o.company}` : ''}
                   </span>
