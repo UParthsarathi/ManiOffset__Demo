@@ -11,11 +11,13 @@ export async function POST(request: Request) {
     }
 
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
     // Store in Supabase 'quotes' table
     const { error } = await supabase
       .from('quotes')
       .insert({
+        user_id: user?.id ?? null,
         name: data.name,
         email: data.email,
         phone: data.phone,

@@ -134,12 +134,7 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
               className="absolute scale-100 sm:scale-110 md:scale-125 lg:scale-[1.15] xl:scale-[1.3] origin-center transition-transform duration-1000 ease-out"
             >
               <RealisticBook
-                title="Dune"
-                image="https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg"
-                tag="ARRAKIS EDITION"
-                theme="border-orange-500/40 text-orange-500"
-                rotation=""
-                delay=""
+                title="FeelThePRINT"
                 onClick={onLaunchBooklet}
                 thickness={36}
               />

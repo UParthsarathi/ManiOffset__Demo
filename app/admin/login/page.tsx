@@ -1,6 +1,5 @@
 import { login } from '../actions'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default async function LoginPage({
   searchParams,
@@ -66,13 +65,6 @@ export default async function LoginPage({
           >
             Sign In
           </button>
-          
-          <p className="text-center text-sm text-slate-400 mt-2">
-            Don&apos;t have an account?{' '}
-            <Link href="/admin/signup" className="text-white hover:text-blue-400 transition-colors font-medium">
-              Create an Account
-            </Link>
-          </p>
         </div>
         
         {sp?.message && (

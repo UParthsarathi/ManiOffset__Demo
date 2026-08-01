@@ -73,18 +73,18 @@ export function MobileFlipBook({ onClose }: { onClose?: () => void }) {
         const pageCount = flip.getPageCount();
 
         if (dx < 0) {
-          // Swipe left -> Previous Page
-          if (currentIndex <= 0) {
-            if (onClose) onClose();
-          } else {
-            flip.flipPrev();
-          }
-        } else {
-          // Swipe right -> Next Page
+          // Swipe left -> Next Page (page pulled leftward, like a real book)
           if (currentIndex >= pageCount - 1) {
             if (onClose) onClose();
           } else {
             flip.flipNext();
+          }
+        } else {
+          // Swipe right -> Previous Page
+          if (currentIndex <= 0) {
+            if (onClose) onClose();
+          } else {
+            flip.flipPrev();
           }
         }
       }
@@ -138,7 +138,6 @@ export function MobileFlipBook({ onClose }: { onClose?: () => void }) {
           useMouseEvents={false} 
           usePortrait={true}
           flippingTime={700}
-          disableFlipByClick={true} // still disabled to avoid accidental taps turning
           className="flip-book shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
         >
           {/* Cover Page */}
