@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { categories as defaultCategories, products } from "@/lib/data";
 import { ArrowRight, Search, ChevronDown } from "lucide-react";
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 function ProductsContent() {
   const searchParams = useSearchParams();
@@ -164,7 +165,7 @@ function ProductsContent() {
                     {/* Bottom Action */}
                     <div className="mt-auto hidden sm:flex items-center justify-between pt-4 border-t border-slate-100">
                       <span className="text-xs font-bold text-emerald-600">
-                        Instant Quote
+                        {CALCULATOR_ENABLED ? 'Instant Quote' : 'View Details'}
                       </span>
                       <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" />
                     </div>
