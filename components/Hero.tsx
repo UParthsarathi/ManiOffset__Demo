@@ -97,9 +97,9 @@ export function Hero({ onLaunchBooklet }: HeroProps) {
               <span>Browse Print Catalog</span>
               <ChevronRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
             </a>
-            {/* Calculator Button */}
+            {/* Quote Button */}
             <button
-              onClick={() => router.push('/calculator')}
+              onClick={() => router.push('/contact/express')}
               className="px-8 py-4 bg-transparent border border-[#f29a1b]/30 hover:border-[#f29a1b]/60 hover:bg-[#f29a1b]/5 text-[#f29a1b] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg transition-all text-center flex items-center justify-center gap-2 cursor-pointer group"
             >
               <Calculator className="w-4 h-4" />

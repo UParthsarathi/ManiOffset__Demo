@@ -116,7 +116,7 @@ export function Navbar() {
 
 
     const handleScrollToConfigurator = () => {
-      router.push("/calculator");
+      router.push("/contact/express");
     };
 
   return (

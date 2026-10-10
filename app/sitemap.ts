@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about/quality-assurance',
     '/contact/express',
     '/contact/corporate',
-    '/calculator',
     '/press',
     '/press/standards',
     '/press/process',

@@ -190,8 +190,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculator" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
-                  Price Calculator
+                <Link href="/contact/express" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  Request a Quote
                 </Link>
               </li>
             </ul>
