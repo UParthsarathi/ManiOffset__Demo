@@ -19,6 +19,7 @@ import { SearchWidget } from "./SearchWidget";
 import { products } from "@/lib/data";
 import { createClient } from "@/lib/supabase/client";
 import { ADMIN_EMAIL } from "@/lib/admin";
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 export function Navbar() {
   const router = useRouter();
@@ -116,7 +117,7 @@ export function Navbar() {
 
 
     const handleScrollToConfigurator = () => {
-      router.push("/contact/express");
+      router.push(CALCULATOR_ENABLED ? "/calculator" : "/contact/express");
     };
 
   return (

@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { ProductContentData } from './ProductContentTemplate';
+import { isBookProduct } from '@/lib/offset-pricing';
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 /**
  * V2 "specimen sheet" treatment — editorial serif headings, mono spec labels,
@@ -271,10 +273,10 @@ export function ProductContentTemplateV2({ data: content, productId, whatsappMes
               Order via WhatsApp
             </a>
             <Link
-              href="/contact/express"
+              href={!CALCULATOR_ENABLED ? '/contact/express' : isBookProduct(productId) ? `/calculator?product=${productId}` : '/calculator/coming-soon'}
               className="inline-flex items-center justify-center px-6 py-3.5 bg-[#005fb3] hover:bg-[#004c8f] text-white font-bold text-[15px] rounded-lg transition-all w-full sm:w-auto"
             >
-              Request a Quote
+              {CALCULATOR_ENABLED ? 'Get an Instant Quote' : 'Request a Quote'}
             </Link>
           </div>
           <div className="mt-8 pt-5 border-t border-amber-200/60">

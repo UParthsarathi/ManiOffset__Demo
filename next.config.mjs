@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Calculator switch (see lib/features.ts): when off, its routes go to the quote form.
+  async redirects() {
+    if (process.env.NEXT_PUBLIC_CALCULATOR_ENABLED === 'true') return [];
+    return ['/calculator', '/calculator/:path*', '/admin/calculator'].map((source) => ({
+      source,
+      destination: source.startsWith('/admin') ? '/admin' : '/contact/express',
+      permanent: false,
+    }));
+  },
   images: {
     remotePatterns: [
       {

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { products } from '@/lib/data'
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 const LAST_CONTENT_UPDATE = new Date('2026-07-12')
 
@@ -18,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about/quality-assurance',
     '/contact/express',
     '/contact/corporate',
+    ...(CALCULATOR_ENABLED ? ['/calculator'] : []),
     '/press',
     '/press/standards',
     '/press/process',

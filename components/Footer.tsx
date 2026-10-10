@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, PhoneCall, ArrowUp, Clock } from "lucide-react";
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 export function Footer() {
   const handleScrollToTop = () => {
@@ -190,8 +191,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact/express" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
-                  Request a Quote
+                <Link href={CALCULATOR_ENABLED ? "/calculator" : "/contact/express"} className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  {CALCULATOR_ENABLED ? "Price Calculator" : "Request a Quote"}
                 </Link>
               </li>
             </ul>

@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, FileText, Layers, AlertCircle, ShoppingCart } from 'lucide-react'
+import { LayoutDashboard, FileText, Layers, AlertCircle, ShoppingCart, Calculator } from 'lucide-react'
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 export function AdminSidebarNav() {
   const pathname = usePathname()
@@ -19,6 +20,17 @@ export function AdminSidebarNav() {
           <LayoutDashboard size={18} />
           <span className="font-medium text-sm">Dashboard</span>
         </Link>
+        {CALCULATOR_ENABLED && (
+        <Link
+          href="/admin/calculator"
+          className={`flex items-center gap-3 px-4 py-2.5 rounded-md transition-colors ${
+            pathname === '/admin/calculator' ? 'bg-[#f29a1b]/10 text-[#f29a1b] font-semibold' : 'text-slate-300 hover:bg-white/5 hover:text-white'
+          }`}
+        >
+          <Calculator size={18} />
+          <span className="font-medium text-sm">Price Calculator</span>
+        </Link>
+        )}
       </div>
 
       <div className="space-y-3">
