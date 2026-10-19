@@ -121,7 +121,7 @@ export function Navbar() {
     };
 
   return (
-    <div className="w-full flex flex-col z-50 sticky top-0 bg-[#0d1430]">
+    <div data-site-nav className="w-full flex flex-col z-50 sticky top-0 bg-[#0d1430]">
       {/* 1. Thin Notification/Header Top Bar */}
       <div className="w-full bg-[#080d22] text-white py-2 px-4 sm:px-6 md:px-12 flex flex-col sm:flex-row items-center justify-between text-[11px] font-medium tracking-wide border-b border-white/5 gap-2 sm:gap-0">
         <div className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors cursor-pointer">
