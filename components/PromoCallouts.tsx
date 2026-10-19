@@ -18,12 +18,12 @@ export function PromoCallouts() {
           
           <div className="space-y-2 sm:space-y-3">
             {/* Left Header Tag */}
-            <span className="text-[#a5b4fc] text-[9px] sm:text-[10px] font-black tracking-widest uppercase block">
+            <span className="text-[#a5b4fc] text-[9px] sm:text-[10px] font-black tracking-widest uppercase font-mono block">
               BULK & INSTITUTIONAL ORDERS
             </span>
 
             {/* Title */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-none">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-black tracking-tight leading-none">
               Need high volume printing?
             </h3>
 
@@ -45,12 +45,12 @@ export function PromoCallouts() {
 
           <div className="space-y-2 sm:space-y-3">
             {/* Right Header Tag */}
-            <span className="text-[#b45309] text-[9px] sm:text-[10px] font-black tracking-widest uppercase block">
+            <span className="text-[#b45309] text-[9px] sm:text-[10px] font-black tracking-widest uppercase font-mono block">
               FAST TURNAROUND
             </span>
 
             {/* Title */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-none text-[#5c3e03]">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-black tracking-tight leading-none text-[#5c3e03]">
               Critical deadlines?
             </h3>
 

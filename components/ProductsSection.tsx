@@ -34,7 +34,7 @@ export function ProductsSection() {
             className="flex items-center justify-center gap-2 mb-2"
           >
             <span className="w-8 h-[1px] bg-amber-500/50"></span>
-            <span className="text-amber-600 font-bold text-xs tracking-[0.2em] uppercase">
+            <span className="text-amber-600 font-bold text-xs tracking-[0.2em] uppercase font-mono">
               Our Products
             </span>
             <span className="w-8 h-[1px] bg-amber-500/50"></span>
@@ -44,7 +44,7 @@ export function ProductsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-slate-900 tracking-tight"
           >
             Premium Printing Services
           </motion.h2>
@@ -68,7 +68,7 @@ export function ProductsSection() {
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`relative shrink-0 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase whitespace-nowrap transition-colors duration-300 ${
+                  className={`relative shrink-0 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full font-mono text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase whitespace-nowrap transition-colors duration-300 ${
                     isActive
                       ? "text-white"
                       : "text-slate-500 hover:text-slate-800 bg-white border border-slate-200 hover:border-slate-300 shadow-sm"
@@ -90,7 +90,7 @@ export function ProductsSection() {
 
         {/* Sub-bar: Showing results & Search */}
         <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3 sm:gap-6 border-b border-slate-200/60 pb-4 sm:pb-6 mt-2">
-          <div className="uppercase text-[10px] sm:text-xs tracking-widest text-slate-400 w-full text-center sm:text-left">
+          <div className="uppercase font-mono text-[10px] sm:text-xs tracking-widest text-slate-400 w-full text-center sm:text-left">
             Showing <span className="text-slate-900 font-bold">{filteredProducts.length}</span> Products
           </div>
           
@@ -134,10 +134,10 @@ export function ProductsSection() {
 
                   {/* Content - Tight Spacing */}
                   <div className="flex flex-col text-left px-0.5 sm:px-1">
-                    <p className="text-[8px] sm:text-[9px] tracking-widest text-slate-400 uppercase mb-1 sm:mb-0.5 truncate">
+                    <p className="text-[8px] sm:text-[9px] font-mono tracking-widest text-slate-400 uppercase mb-1 sm:mb-0.5 truncate">
                       {product.categoryLabel}
                     </p>
-                    <h4 className="font-bold text-sm sm:text-base text-slate-900 tracking-tight leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-2">
+                    <h4 className="font-serif font-bold text-sm sm:text-base text-slate-900 tracking-tight leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-2">
                       {product.title}
                     </h4>
                   </div>
@@ -155,7 +155,7 @@ export function ProductsSection() {
                <div className="bg-white shadow-sm border border-slate-100 w-20 h-20 rounded-full flex items-center justify-center mb-6">
                  <Search className="w-8 h-8 text-slate-300" />
                </div>
-               <h4 className="text-xl font-bold text-slate-800">No matching products found</h4>
+               <h4 className="text-xl font-serif font-bold text-slate-800">No matching products found</h4>
                <p className="text-slate-500 font-light mt-2 max-w-sm mx-auto">Try adjusting your filters or search term to discover different printing options.</p>
              </motion.div>
           )}
