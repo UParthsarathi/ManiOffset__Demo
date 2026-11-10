@@ -8,7 +8,7 @@ import Image from 'next/image';
 import {
   quote, snapToSlab, isBookProduct, COPIES_SLABS, PAGES_OPTIONS, SIZES, INNER_COLORS, INNER_PAPERS,
   WRAPPER_TYPES, WRAPPER_BOARDS, BINDINGS, SIZE_CM, PAGE_LIMITS,
-  Size, InnerColor, InnerPaper, WrapperType, WrapperBoard, Binding, QuoteInput, QuoteResult,
+  Size, InnerColor, InnerPaper, WrapperType, WrapperBoard, Binding, QuoteInput, QuoteResult, RateCard,
 } from '@/lib/offset-pricing';
 import { BookPreview, BindingGlyph, cardCls, BINDING_DESC, PAPER_DESC } from '@/components/calculator/BookVisuals';
 
@@ -20,8 +20,8 @@ const inr = (n: number, decimals = 0) =>
 const PRICE_BREAK_QTYS = [500, 1000, 2000, 3000, 5000, 10000];
 
 // Some spec combinations aren't on the rate card (e.g. Case Binding above 2000 pages)
-const safeQuote = (spec: QuoteInput): QuoteResult | null => {
-  try { return quote(spec); } catch { return null; }
+const safeQuote = (spec: QuoteInput, rates: RateCard): QuoteResult | null => {
+  try { return quote(spec, rates); } catch { return null; }
 };
 
 function Section({ step, title, hint, children }: { step: number; title: string; hint?: string; children: React.ReactNode }) {
@@ -39,7 +39,8 @@ function Section({ step, title, hint, children }: { step: number; title: string;
   );
 }
 
-export function QuoteCalculator() {
+// rates: the published rate card, loaded on the server by app/calculator/page.tsx
+export function QuoteCalculator({ rates }: { rates: RateCard }) {
   const searchParams = useSearchParams();
   // Books only: the rate card covers paged, bound products (ids 1-10). Other product
   // ids are ignored here — their flow is TBD by the owner; they keep the quote form.
@@ -72,7 +73,7 @@ export function QuoteCalculator() {
     : '';
   let q: QuoteResult | null = null;
   let quoteError = '';
-  try { q = quote(spec); } catch (e) { quoteError = e instanceof Error ? e.message : String(e); }
+  try { q = quote(spec, rates); } catch (e) { quoteError = e instanceof Error ? e.message : String(e); }
   if (pageLimitError) q = null;
 
   const handleSubmitQuote = async (e: React.FormEvent) => {
@@ -380,7 +381,7 @@ export function QuoteCalculator() {
             <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Per-book price at volume</span>
             <div className="grid grid-cols-3 gap-1.5">
               {PRICE_BREAK_QTYS.map((qty) => {
-                const bq = pageLimitError ? null : safeQuote({ ...spec, copies: qty });
+                const bq = pageLimitError ? null : safeQuote({ ...spec, copies: qty }, rates);
                 const active = qty === copies;
                 return (
                   <button

@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { QuoteCalculator } from '@/components/QuoteCalculator';
 import { BackButton } from '@/components/BackButton';
 import { isBookProduct } from '@/lib/offset-pricing';
+import { getPublishedRates } from '@/lib/rates';
 
 export const metadata: Metadata = {
   title: 'Book Printing Calculator',
@@ -16,6 +17,7 @@ export default async function CalculatorPage({ searchParams }: { searchParams: P
   // The rate card prices books only — other products get the coming-soon page
   const { product } = await searchParams;
   if (product && !isBookProduct(Number(product))) redirect('/calculator/coming-soon');
+  const rates = await getPublishedRates();
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
       <Navbar />
@@ -24,7 +26,7 @@ export default async function CalculatorPage({ searchParams }: { searchParams: P
       <main className="flex-1 w-full pt-8 pb-20 px-4 sm:px-6 lg:px-12">
         <BackButton />
         <Suspense fallback={<div className="h-[50vh] flex items-center justify-center"><div className="w-8 h-8 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" /></div>}>
-          <QuoteCalculator />
+          <QuoteCalculator rates={rates} />
         </Suspense>
       </main>
 

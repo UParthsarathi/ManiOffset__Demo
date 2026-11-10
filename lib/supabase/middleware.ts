@@ -47,8 +47,13 @@ export async function updateSession(request: NextRequest) {
   const isLoginPath = pathname.startsWith('/admin/login')
   const isAdminUser = user?.email === ADMIN_EMAIL
 
+  // Local testing only: `next dev` with ADMIN_LOCAL_BYPASS=true in .env.local opens /admin
+  // without signing in. It cannot switch on for the live site, where NODE_ENV is 'production'.
+  // Orders and publishing still need a real admin sign-in: the pages and the database check it.
+  const localBypass = process.env.NODE_ENV === 'development' && process.env.ADMIN_LOCAL_BYPASS === 'true'
+
   // (a) Not signed in on a protected admin path → login
-  if (!user && isAdminPath && !isLoginPath) {
+  if (!user && isAdminPath && !isLoginPath && !localBypass) {
     const url = request.nextUrl.clone()
     url.pathname = '/admin/login'
     return NextResponse.redirect(url)
