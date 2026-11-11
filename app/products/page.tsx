@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { categories as defaultCategories, products } from "@/lib/data";
 import { ArrowRight, Search, ChevronDown } from "lucide-react";
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 function ProductsContent() {
   const searchParams = useSearchParams();
@@ -134,7 +135,7 @@ function ProductsContent() {
           {filteredProducts.length === 0 ? (
              <div className="py-20 text-center text-slate-500">No products found matching your criteria.</div>
           ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <Link href={`/product/${product.id}`} key={product.id} className="group flex flex-col bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                   {/* Image Section */}
@@ -164,7 +165,7 @@ function ProductsContent() {
                     {/* Bottom Action */}
                     <div className="mt-auto hidden sm:flex items-center justify-between pt-4 border-t border-slate-100">
                       <span className="text-xs font-bold text-emerald-600">
-                        Instant Quote
+                        {CALCULATOR_ENABLED ? 'Instant Quote' : 'View Details'}
                       </span>
                       <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" />
                     </div>

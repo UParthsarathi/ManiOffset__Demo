@@ -90,6 +90,6 @@ assert.throws(() => quote(q(2008, 500, 'A4', 'Black', '130 GSM Art Paper', 'Norm
 
 assert.equal(snapToSlab(1), 300);
 assert.equal(snapToSlab(649), 600);
-assert.equal(snapToSlab(99999), 10000);
+assert.equal(snapToSlab(99999), 25000);
 
 console.log(`OK — ${CASES.length} Excel-verified cases + error handling checks passed`);

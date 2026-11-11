@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { isBookProduct } from '@/lib/offset-pricing';
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 export interface ProductFeature {
   title: string;
@@ -250,10 +251,10 @@ export function ProductContentTemplate({ data: content, productId, whatsappMessa
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center w-full">
             <Link 
-              href={isBookProduct(productId) ? `/calculator?product=${productId}` : '/calculator/coming-soon'}
+              href={!CALCULATOR_ENABLED ? '/contact/express' : isBookProduct(productId) ? `/calculator?product=${productId}` : '/calculator/coming-soon'}
               className="inline-flex items-center justify-center px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
-              Get an Instant Quote
+              {CALCULATOR_ENABLED ? 'Get an Instant Quote' : 'Request a Quote'}
             </Link>
             <a 
               href={`https://wa.me/919444409824?text=${whatsappMessage}`}

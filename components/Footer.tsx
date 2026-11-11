@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, PhoneCall, ArrowUp, Clock } from "lucide-react";
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 export function Footer() {
   const handleScrollToTop = () => {
@@ -46,14 +47,14 @@ export function Footer() {
               <MapPin className="w-4 h-4 text-[#f29a1b] shrink-0 mt-0.5" />
               <span>115, 4A-1, Noombal Main Rd, Mahalakshmi Nagar, Vanagaram, Chennai — 600077</span>
             </div>
-            <div className="flex items-center gap-2.5">
+            <a href="tel:+919444409824" className="flex items-center gap-2.5 hover:text-white transition-colors">
               <PhoneCall className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>+91 94444 09824</span>
-            </div>
-            <div className="flex items-center gap-2.5">
+            </a>
+            <a href="mailto:contact@feeltheprint.com" className="flex items-center gap-2.5 hover:text-white transition-colors">
               <Mail className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>contact@feeltheprint.com</span>
-            </div>
+            </a>
             <div className="flex items-center gap-2.5">
               <Clock className="w-4 h-4 text-[#f29a1b] shrink-0" />
               <span>Mon–Sat, 9:30 AM – 7:00 PM</span>
@@ -190,8 +191,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculator" className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
-                  Price Calculator
+                <Link href={CALCULATOR_ENABLED ? "/calculator" : "/contact/express"} className="hover:text-[#f29a1b] hover:font-semibold transition-colors">
+                  {CALCULATOR_ENABLED ? "Price Calculator" : "Request a Quote"}
                 </Link>
               </li>
             </ul>

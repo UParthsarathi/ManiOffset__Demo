@@ -48,8 +48,8 @@ export default function BulkOrderForm({ onSuccess }: { onSuccess?: () => void })
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5 text-left">
-          <label className="text-sm font-medium text-slate-700">First Name <span className="text-red-500">*</span></label>
-          <input required type="text" name="first_name" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3]" />
+          <label className="text-sm font-medium text-slate-700">First Name</label>
+          <input type="text" name="first_name" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3]" />
         </div>
         <div className="space-y-1.5 text-left">
           <label className="text-sm font-medium text-slate-700">Last Name</label>
@@ -59,8 +59,8 @@ export default function BulkOrderForm({ onSuccess }: { onSuccess?: () => void })
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5 text-left">
-          <label className="text-sm font-medium text-slate-700">Email Address <span className="text-red-500">*</span></label>
-          <input required type="email" name="email" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3]" />
+          <label className="text-sm font-medium text-slate-700">Email Address</label>
+          <input type="email" name="email" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3]" />
         </div>
         <div className="space-y-1.5 text-left">
           <label className="text-sm font-medium text-slate-700">Phone Number <span className="text-red-500">*</span></label>
@@ -73,18 +73,7 @@ export default function BulkOrderForm({ onSuccess }: { onSuccess?: () => void })
         <input type="text" name="company" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3]" />
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5 text-left">
-          <label className="text-sm font-medium text-slate-700">Product Type <span className="text-red-500">*</span></label>
-          <select required name="product_type" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3] bg-white text-slate-900">
-            <option value="">Select...</option>
-            <option value="Books">Books</option>
-            <option value="Magazines">Magazines</option>
-            <option value="Catalogs">Catalogs</option>
-            <option value="Packaging">Packaging</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+      <div className="grid grid-cols-1 gap-4">
         <div className="space-y-1.5 text-left">
           <label className="text-sm font-medium text-slate-700">Estimated Quantity <span className="text-red-500">*</span></label>
           <select required name="quantity" className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3] bg-white text-slate-900">

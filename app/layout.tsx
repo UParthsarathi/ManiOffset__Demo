@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google';
 // import { FloatingCalculatorButton } from '@/components/FloatingCalculatorButton';
 import "./globals.css";
 
@@ -6,13 +6,12 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
 });
-
-const playfair = Playfair_Display({
+const playfair = Inter({
   subsets: ['latin'],
   variable: '--font-serif',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = Inter({
   subsets: ['latin'],
   variable: '--font-mono',
 });

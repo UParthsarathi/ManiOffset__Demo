@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { PAGES_OPTIONS, COPIES_SLABS, isBookProduct } from '@/lib/offset-pricing';
+import { CALCULATOR_ENABLED } from '@/lib/features';
 
 export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: number, rawWhatsappMessage: string }) {
   const [pages, setPages] = useState('');
@@ -77,10 +78,10 @@ export function QuickQuoteForm({ productId, rawWhatsappMessage }: { productId: n
           Order via WhatsApp
         </a>
         <Link
-          href={calculatorUrl}
+          href={CALCULATOR_ENABLED ? calculatorUrl : '/contact/express'}
           className="flex-1 group flex items-center justify-center gap-2 bg-[#005fb3] hover:bg-[#004c8f] text-white px-6 py-3.5 rounded-lg transition-all font-bold text-[15px]"
         >
-          <span>Get an Instant Quote</span>
+          <span>{CALCULATOR_ENABLED ? 'Get an Instant Quote' : 'Request a Quote'}</span>
           <ArrowRight className="w-4 h-4 text-white/80 group-hover:translate-x-0.5 transition-transform" />
         </Link>
       </div>

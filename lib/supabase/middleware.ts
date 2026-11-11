@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { ADMIN_EMAIL } from '@/lib/admin'
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -41,23 +42,35 @@ export async function updateSession(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith('/admin') &&
-    !request.nextUrl.pathname.startsWith('/admin/login') &&
-    !request.nextUrl.pathname.startsWith('/admin/signup')
-  ) {
+  const { pathname } = request.nextUrl
+  const isAdminPath = pathname.startsWith('/admin')
+  const isLoginPath = pathname.startsWith('/admin/login')
+  const isAdminUser = user?.email === ADMIN_EMAIL
+
+  // Local testing only: `next dev` with ADMIN_LOCAL_BYPASS=true in .env.local opens /admin
+  // without signing in. It cannot switch on for the live site, where NODE_ENV is 'production'.
+  // Orders and publishing still need a real admin sign-in: the pages and the database check it.
+  const localBypass = process.env.NODE_ENV === 'development' && process.env.ADMIN_LOCAL_BYPASS === 'true'
+
+  // (a) Not signed in on a protected admin path → login
+  if (!user && isAdminPath && !isLoginPath && !localBypass) {
     const url = request.nextUrl.clone()
     url.pathname = '/admin/login'
     return NextResponse.redirect(url)
   }
 
-  if (
-    user && 
-    (request.nextUrl.pathname.startsWith('/admin/login') || request.nextUrl.pathname.startsWith('/admin/signup'))
-  ) {
+  // (b) Signed-in non-admin (customer) must not reach the admin shell → home
+  if (user && !isAdminUser && isAdminPath && !isLoginPath) {
     const url = request.nextUrl.clone()
-    url.pathname = '/admin'
+    url.pathname = '/'
+    return NextResponse.redirect(url)
+  }
+
+  // (c) Signed-in user on the login page: admin → dashboard, customer must
+  // sign out first to switch accounts → home
+  if (user && isLoginPath) {
+    const url = request.nextUrl.clone()
+    url.pathname = isAdminUser ? '/admin' : '/'
     return NextResponse.redirect(url)
   }
 

@@ -3,8 +3,7 @@ import { redirect } from 'next/navigation'
 import { products } from '@/lib/data'
 import Link from 'next/link'
 import Image from 'next/image'
-
-const ADMIN_EMAIL = 'parthu3915@gmail.com'
+import { ADMIN_EMAIL } from '@/lib/admin'
 
 export default async function MediaDashboard() {
   const supabase = await createClient()
