@@ -3,22 +3,24 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '../../lib/supabase/server'
-import { ADMIN_EMAIL } from '../../lib/admin'
+import { ADMIN_EMAIL, ADMIN_USERNAME } from '../../lib/admin'
 import { parseRates } from '../../lib/offset-pricing'
 
+// One fixed admin. Any other name is turned away before a sign-in is even attempted,
+// and every failure gets the same message so the form gives nothing away.
 export async function login(formData: FormData) {
+  const fail = () => redirect('/admin/login?message=' + encodeURIComponent('Wrong username or password.'))
+
+  const username = String(formData.get('username') ?? '').trim().toLowerCase()
+  // The admin's own email is accepted too: it names the same account, and typing it is a natural slip.
+  if (username !== ADMIN_USERNAME && username !== ADMIN_EMAIL) return fail()
+
   const supabase = await createClient()
-
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  }
-
-  const { error } = await supabase.auth.signInWithPassword(data)
-
-  if (error) {
-    return redirect('/admin/login?message=' + encodeURIComponent(error.message))
-  }
+  const { error } = await supabase.auth.signInWithPassword({
+    email: ADMIN_EMAIL,
+    password: String(formData.get('password') ?? ''),
+  })
+  if (error) return fail()
 
   revalidatePath('/', 'layout')
   redirect('/admin')

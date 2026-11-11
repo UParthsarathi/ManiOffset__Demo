@@ -32,13 +32,15 @@ export default async function LoginPage({
         
         <div className="flex flex-col gap-5">
           <div>
-            <label className="text-sm font-medium text-slate-300 mb-1.5 block" htmlFor="email">
-              Email Address
+            <label className="text-sm font-medium text-slate-300 mb-1.5 block" htmlFor="username">
+              Email or username
             </label>
             <input
               className="w-full rounded-lg px-4 py-3 bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3] transition-all placeholder:text-slate-500"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="text"
+              autoComplete="username"
               placeholder="you@example.com"
               required
             />
@@ -50,8 +52,10 @@ export default async function LoginPage({
             </label>
             <input
               className="w-full rounded-lg px-4 py-3 bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-[#005fb3]/50 focus:border-[#005fb3] transition-all placeholder:text-slate-500"
+              id="password"
               type="password"
               name="password"
+              autoComplete="current-password"
               placeholder="••••••••"
               required
             />
